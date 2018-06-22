@@ -1,0 +1,19 @@
+const coupon = [
+  // 优惠券规则
+  {
+    path: "couponRule",
+    component: () => import('@/components/page/couponRule/list'),
+  },
+  //优惠券规则详情
+  {
+    path: "couponRule/detail",
+    component: () => import('@/components/page/couponRule/detail'),
+  },
+  //优惠券详情列表
+  {
+    path: "couponRule/table",
+    component: () => import('@/components/page/couponRule/table'),
+  }
+];
+
+export default coupon;

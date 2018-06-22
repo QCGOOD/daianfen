@@ -1,0 +1,129 @@
+@import '../../../iconfont.wxss';
+
+.coupon-item{
+   position: relative;
+   width:690rpx;
+   min-height:290rpx;
+   margin:30rpx auto 0;
+   border-radius:8px;
+   background: #fff;
+ }
+ .coupon-item:last-child{
+   margin-bottom:30rpx;
+ }
+ .coupon-item .coupon-bg{
+   width:100%;
+   height:230rpx;
+   border-radius:8px 8px 0 0;
+ }
+ .coupon-item .img-icon{
+   position: absolute;
+   top:0;
+   right:30rpx;
+   width:230rpx;
+   height:230rpx;
+   border-radius:50%;
+ }
+ .coupon-item .coupon-top{
+   position: absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:230rpx;
+   box-sizing: border-box;
+   color:#fff;
+   overflow: hidden;
+   padding:20rpx 30rpx;
+ }
+ .coupon-item .coupon-top .text{
+   display: block;
+   width:350rpx;
+   word-break: break-all;
+   line-height: 1.3;
+ }
+ .coupon-item .state-text{
+   position: absolute;
+   top:20rpx;
+   right:30rpx;
+   display: block;
+   font-size:28rpx;
+   color:#fff;
+ }
+ .right-bottom{
+   position: absolute;
+   top:50%;
+   right:30rpx;
+   display: block;
+   font-size:36rpx;
+   color:#fff;
+ }
+ .coupon-item .coupon-footer{
+   display: flex;
+   justify-content: space-between;
+   align-items:center;
+   width:100%;
+   height:60rpx;
+   background:#fff;
+   border-radius: 0 0 8px 8px;
+   box-sizing: border-box;
+   line-height: 60rpx;
+   font-size:24rpx;
+   color:#808080;
+   padding:0 30rpx;
+ }
+ .coupon-item .coupon-footer .icon{
+   font-size:22rpx;
+   color:#999;
+   padding-left:5px;
+   transition: all .3s;
+ }
+
+ .coupon-item .coupon-footer .icon-rotate{
+    transform: rotate(-180deg);
+ }
+
+ .coupon-item .coupon-detail{
+   width:100%;
+   height:0;
+   background:#fff;
+   border-radius:8px;
+   box-sizing: border-box;
+   text-align: center;
+   overflow: hidden;
+   transform: translateY(-50%);
+   transition: .3s;
+ }
+ .coupon-item .coupon-detail::before{
+   position: absolute;
+   top:0;
+   left:30rpx;
+   content:'';
+   border-bottom:1px solid #f2f2f2;
+   width:100%;
+ }
+ .coupon-item .coupon-detail-show{
+   height:auto;
+   transform: translateY(0);
+ }
+ .coupon-item .coupon-detail .detail-text{
+   display: inline-block;
+   text-align: left;
+   line-height: 1.4;
+   font-size:25rpx;
+   word-wrap: break-word;
+   margin:30rpx 30rpx 0;
+ }
+ .coupon-item .coupon-detail .image{
+   width:600rpx;
+   height:130rpx;
+   margin: 40rpx auto 0;
+   text-align: center;
+ }
+ .coupon-item .coupon-detail .code{
+   display: block;
+   word-spacing:3px;
+   letter-spacing:3px;
+   margin:20rpx 0;
+
+ }
+ 

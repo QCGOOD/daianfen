@@ -1,0 +1,41 @@
+<view class="layout" style="min-height:{{layoutHeight-30}}px;">
+   <view class="reserve-wrap" hidden="{{reverseData.length == 0}}">
+      <block wx:for="{{reverseData}}" wx:key="{{index}}">
+         <navigator class="reserve-item" url="../reserveDetail/reserveDetail?id={{item.id}}">
+            <view class="reserve-top">
+               <image class="head-img" src="{{item.imagUrl?item.imagUrl:userInfo.avatarUrl}}"></image>
+               <text class="name">{{item.memberName}}</text>
+               <view class="cancel" wx:if="{{item.state == 1}}" >已预约</view>
+               <view class="cancel" wx:if="{{item.state == 2}}" style="color:#808080;" >已到店</view>
+               <view class="cancel" wx:if="{{item.state == 3}}" style="color:#808080;" >已取消</view>
+            </view>
+            <view class="reserve-content">
+               <view class="content-item">
+                  <i class="icon icon-mendian"></i>
+                  <text class="text-l" selectable>{{item.shopName}}</text>
+               </view>
+               <view class="content-item">
+                  <i class="icon icon-yuyueshijian"></i>
+                  <text class="text-l">{{item.reservationDate +' '+ item.reservationTime}}</text>
+               </view>
+               <view class="content-item">
+                  <i class="icon icon-zhuanguiweizhi"></i>
+                  <text class="text-l" selectable>{{item.address}}</text>
+                  <!-- <text class="text-r" style="display:inline-block;padding-left:10px;color:#b80223;" data-index="{{index}}" catchtap="navigation">导航</text> -->
+               </view>
+            </view>
+         </navigator>
+      </block>
+   </view>
+   <view class="null" hidden="{{reverseData.length != 0}}">
+      <image src="../../../static/images/null-reserve.png"></image>
+      <text>暂无记录</text>
+   </view>
+</view>
+<view class="page-bottom" hidden="{{reverseData.length == 0}}">
+   <text>我是有底线的</text>
+</view>
+<view class="copyright">
+   <image src="/static/images/qc-logo.png" class="qc-logo"  mode="widthFix"></image>
+   <text class="qc-title">技术支持 企成互动</text>
+</view>

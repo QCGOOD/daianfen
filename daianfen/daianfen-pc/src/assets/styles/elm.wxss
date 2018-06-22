@@ -1,0 +1,16 @@
+/* 表单组件 input  */
+/* 表单组件 radio  */
+/* el-table */
+.el-submenu__title:hover {
+  background-color: #000;
+}
+.el-submenu__title:hover {
+  outline: none;
+  background-color: #000;
+}
+/*表单加分页*/
+.block {
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 50px;
+}

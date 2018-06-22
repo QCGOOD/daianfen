@@ -1,0 +1,17 @@
+<view class="banner">
+   <swiper class="banner-swiper" autoplay="true" interval="3000" circular="true" bindchange="current">
+      <block wx:for="{{bannerArr}}" wx:key="{{index}}">
+         <swiper-item>
+            <navigator url="more/more" style="width:100%;">
+               <image class="banner-swiper-img" mode="widthFix" src="{{imgHead+item.url}}" />
+            </navigator>
+         </swiper-item>
+      </block>
+   </swiper>
+   <view class="banner-dots">
+      <block wx:for="{{bannerArr}}" wx:key="{{index}}">
+         <view class="banner-dots-dot {{index == current?'banner-active':''}}"></view>
+      </block>
+   </view>
+</view>
+

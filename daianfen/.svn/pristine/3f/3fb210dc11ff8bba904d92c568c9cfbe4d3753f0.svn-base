@@ -1,0 +1,52 @@
+page {
+  background: #f2f2f2;
+  font-size:28rpx;
+}
+.logout{
+  width:100%;
+  margin-top:30px;
+  border-radius:0;
+  background:#fff;
+  color:#333;
+}
+.logout::after{
+  border:0 none;
+}
+.my-wrap {
+  margin-bottom: 20rpx;
+  height: 260rpx;
+  padding-top: 60rpx;
+  align-items: center;
+  text-align: center;
+  color:#fff;
+  background: #b80223;
+}
+
+.my-wrap .userinfo-avatar {
+  display: block;
+  margin: 0rpx auto 30rpx;
+  width: 125rpx;
+  height: 125rpx;
+  border-radius: 50%;
+  background:#ccc;
+}
+.my-wrap .userinfo-phone{
+	display: block;
+	margin: 3px auto;
+}
+
+.main-wrap .section-item{
+  display: flex;
+  justify-content: center;
+	align-items: center;
+  background:#fff;
+  border:1px solid #b80223;
+	border-radius:6px;
+	line-height: 100rpx;
+	color:#b80223;
+  margin:0 30rpx;
+  margin-top:40rpx;
+}
+.main-wrap .section-item .icon{
+  padding-right:8px;
+}

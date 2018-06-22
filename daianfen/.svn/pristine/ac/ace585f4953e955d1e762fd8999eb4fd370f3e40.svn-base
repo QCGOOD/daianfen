@@ -1,0 +1,35 @@
+<view class="banner">
+	<image wx:if="{{imgPath}}" src="{{imgHead+imgPath}}" mode="widthFix"></image>
+</view>
+<view class="main">
+	<view class="main-title">选择时间</view>
+   <view class="section scroll-wrap" data-type="date" bindtap="showDate">
+      <text class="section-title">日期：</text>
+      <text class="section-value">{{date}}</text>
+      <i class="icon icon-zhankai-kuai" style="font-size:30rpx;color:#808080"></i>
+      <scroll-view hidden="{{!showDate}}" class="scroll-view" scroll-y>
+         <view class="scroll-view-item" data-type="date" data-value="{{item}}" catchtap="choiceDate" wx:for="{{dateData}}" wx:key="index">{{item}}</view>
+      </scroll-view>
+   </view>
+   <view class="section scroll-wrap" data-type="time" bindtap="showDate">
+      <text class="section-title">时间：</text>
+      <text class="section-value">{{time}}</text>
+      <i class="icon icon-zhankai-kuai" style="font-size:30rpx;color:#808080"></i>
+      <scroll-view hidden="{{!showTime}}" class="scroll-view" scroll-y>
+         <view class="scroll-view-item" data-type="time" data-value="{{item}}" catchtap="choiceDate" wx:for="{{timeData}}" wx:key="index">{{item}}</view>
+      </scroll-view>
+   </view>
+   <view class="section">
+      <text class="section-title">姓名：</text>
+      <input class="section-value"  data-type="uname" placeholder="请输入您的姓名" value="{{uname}}" bindinput="inputting"/>
+   </view>
+   <view class="section">
+      <text class="section-title">手机：</text>
+      <input class="section-value" type="number" disabled="{{!isNewUser}}" maxlength="11" data-type="phone" placeholder="请输入您的手机号" value="{{phone}}" bindinput="inputting"/>
+      <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">13181983435</button> -->
+   </view>
+   <view class="tips" wx:if="{{isNewUser}}" style="line-height:2.0;color:#808080;">温馨提示：手机号输入后自动绑定微信，不可再修改</view>
+   <view class="btn-wrap">
+      <view class="btn" bindtap="submitFormData">预约试穿</view>
+   </view>
+</view>
