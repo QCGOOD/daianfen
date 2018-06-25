@@ -8,13 +8,17 @@
     </block>
   </view>
   <view class="main-wrap">
+   	<navigator class="section-item" url="../index/bespeakStore/bespeakStore">
+   		<i class="icon icon-weibiaoti-" style="font-size: 40rpx;color:#b80223;"></i>
+         <text>预约试穿</text>
+   	</navigator>
    	<navigator class="section-item" url="myReserve/myReserve">
    		<i class="icon icon-yuyuejilu" style="font-size: 40rpx;color:#b80223;"></i>
          <text>预约记录</text>
    	</navigator>
    	<navigator class="section-item" url="myCoupon/myCoupon">
    		<i class="icon icon-youhuiquan" style="font-size: 30rpx;color:#b80223;"></i>
-         <text>优惠券</text>
+         <text>优 惠 券</text>
    	</navigator>
   </view>
 </view>

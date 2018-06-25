@@ -1,7 +1,7 @@
 
 // let host = 'http://192.168.1.32:8180/triumph/app'; // 宁
-let host = 'http://192.168.1.18:8088/triumph/app'; // 华
-// let host = 'https://triumph.wego168.com/triumph/app'; //线上
+// let host = 'http://192.168.1.18:8088/triumph/app'; // 华
+let host = 'https://triumph.wego168.com/triumph/app'; //线上
 // 
 
 // 用来获取storage 中的sessionKey  添加到 data中的参数里面;
