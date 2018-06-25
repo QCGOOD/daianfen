@@ -33,21 +33,21 @@
         <up-load-file url="/employee/importData" size="small"></up-load-file>
       </button-wrap>
     </div>
-    <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" stripe url="/reservation/list"></qc-table>
+    <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" stripe url="/employee/list"></qc-table>
   
     <el-dialog title="编辑资料" :visible.sync="dialogFormVisible" width="40%" append-to-body @close="digClose()">
-      <el-form :model="model" :rules="rules" size="small" style="width:300px;margin:0 auto;">
-        <el-form-item label="导购姓名" prop="employeeName">
-          <el-input v-model="model.employeeName"></el-input>
+      <el-form :model="model" ref="model" :rules="rules" size="small" style="width:300px;margin:0 auto;">
+        <el-form-item label="导购姓名" prop="name">
+          <el-input v-model="model.name"></el-input>
         </el-form-item>
         <el-form-item label="导购手机" prop="phoneNo">
           <el-input type="number" v-model.number="model.phoneNo"></el-input>
         </el-form-item>
-        <el-form-item label="雇员编号" prop="shopNo">
-          <el-input v-model="model.shopNo"></el-input>
+        <el-form-item label="雇员编号" prop="jobNumber">
+          <el-input v-model="model.jobNumber"></el-input>
         </el-form-item>
-        <el-form-item label="专柜编号" prop="shopName">
-          <el-input v-model="model.shopName"></el-input>
+        <el-form-item label="专柜编号" prop="shopNo">
+          <el-input v-model="model.shopNo"></el-input>
         </el-form-item>
         <el-form-item label="专柜代号" prop="shopCode">
           <el-input v-model="model.shopCode"></el-input>
@@ -55,7 +55,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="digClose()">取 消</el-button>
-        <el-button type="primary" @click="digClose()">确 定</el-button>
+        <el-button type="primary" @click="submit()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -90,17 +90,20 @@ export default {
         city: '',
       },
       showData: [
-        { prop: "name", label: "雇员编号", width:150, align: 'left'},
-        { prop: "code", label: "姓名", width:150, align: 'left'},
-        { prop: "customerName", label: "电话", width:160, align: 'left'},
-        { prop: "remark", label: "状态", width:120, align: 'left'},
-        { prop: "endDate", label: "城市", width:120, align: 'left'},
-        { prop: "createTime", label: "专柜编号", width:120, align: 'left'},
-        { prop: "createTime", label: "专柜代号", width:120, align: 'left'},
-        { prop: "createTime", label: "专柜", align: 'left'},
+        { prop: "jobNumber", label: "雇员编号", width:150, align: 'center'},
+        { prop: "name", label: "姓名", width:150, align: 'left'},
+        { prop: "phoneNo", label: "电话", width:160, align: 'left'},
+        { prop: "state", label: "状态", width:120, align: 'left', template: 'guideState'},
+        { prop: "city", label: "城市", width:100, align: 'left'},
+        { prop: "shopNo", label: "专柜编号", width:120, align: 'left'},
+        { prop: "shopCode", label: "专柜代号", width:120, align: 'left'},
+        { prop: "shopName", label: "专柜", align: 'left'},
       ],
       rules: {
-        employeeName: [
+        name: [
+          { required: true, message: '字段不能为空', trigger: 'blur' }
+        ],
+        jobNumber: [
           { required: true, message: '字段不能为空', trigger: 'blur' }
         ],
         phoneNo: [
@@ -123,6 +126,7 @@ export default {
       this.$http.post('/employee/add', data)
       .then(res => {
         this.$message.success('提交成功')
+        this.searchKeep();
         this.digClose()
       })
     },
@@ -154,7 +158,7 @@ export default {
     update() {
       this.updateId = this.tableList.id;
       this.dialogFormVisible = true;
-      this.model = this.tableList
+      this.model = JSON.parse(JSON.stringify(this.tableList))
     },
     digClose(flag) {
       this.updateId = "";
@@ -173,6 +177,16 @@ export default {
     submit() {
       this.$refs.model.validate(valid => {
         if (valid) {
+          // let params = {
+          //   id: this.model.id || '',
+          //   jobNumber: this.model.jobNumber,
+          //   name: this.model.name,
+          //   shopNo: this.model.shopNo,
+          //   shopCode: this.model.shopCode,
+          //   phoneNo: this.model.phoneNo,
+          // }
+          if(this.model.createTime) delete this.model.createTime
+          if(this.model.updateTime) delete this.model.updateTime
           this.apiAddData(this.model);
         } else {
           this.loading = false;

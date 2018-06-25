@@ -26,29 +26,15 @@ axios.defaults.baseURL = URL;
 //     return Promise.reject(error);
 // });
 //返回状态判断(添加响应拦截器)
-axios.interceptors.response.use((res) => {
-  // console.log('返回状态判断', res.data.errCode)
-  // if (res.data.errCode == 50103) {
-  //   console.log(res.data.errCode)
-  // }
-  // debugger
-  if ( res.data.errCode === 0 ) {
-    return res;
-    // console.log(res.data)
+axios.interceptors.response.use((success) => {
+  if (success.data.errCode == 0) {
+    return Promise.resolve(success);
   } else {
-    if (res.data.errCode === 401) {
-      Vue.$router.replace("/login");
-    }
-    Message.error(res.data.errMsg);
-    // Vue.$router.replace("/login");
-    return Promise.reject(res);
-  }
-}, function axiosRetryInterceptor (err) {
-  // Message.error('请求超时');
-  // alert('请求超时')
-  // console.log(Vue.$router)
-  // Vue.$router.replace("/login");
-})
+    return Promise.reject(success);
+  };
+}, (error) => {
+  return Promise.reject(error);
+});
 export default {
   //返回一个Promise(发送请求)
   post2: function (url, params) {

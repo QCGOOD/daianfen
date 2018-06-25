@@ -12,6 +12,7 @@
   "dependencies": {
     "@xkeshi/vue-qrcode": "^0.3.0",
     "axios": "^0.18.0",
+    "echarts": "^4.1.0",
     "element-ui": "^2.3.6",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",

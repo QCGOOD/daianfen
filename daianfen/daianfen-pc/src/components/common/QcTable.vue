@@ -44,24 +44,38 @@
           <img style="display:block;margin:5px auto" src="http://athena-1255600302.cosgz.myqcloud.com/attachments/qc-logo.png" width="60" height="60" v-if="scope.row[item.prop] ==undefined || scope.row[item.prop] === ''">
           <img style="display:block;margin:5px auto" :src="`${imgHost}${scope.row[item.prop]}`" width="60" height="60" v-else-if="item.isPrefix">
           <img style="display:block;margin:5px auto" :src="`${imgHost}${scope.row[item.prop]}`" width="100" height="100" v-else-if="item.isQR">
-          <img style="display:block;margin:5px auto" :src="`${scope.row[item.prop]}`" width="60" height="60" v-else-if="item.headImage">
+          <img style="display:block;margin:5px auto;border-radius:50%;" :src="`${scope.row[item.prop]}`" width="60" height="60" v-else-if="item.headImage">
           <img style="display:block;margin:5px auto" :src="scope.row[item.prop]" width="60" height="60" v-else>
         </template>
       </el-table-column>
       <el-table-column align="center" v-else-if="item.template == 'mark'" :label="item.label" :width="140">
         <template slot-scope="scope">
-          <div @click="handleAdd(row)" class="btn" style="color:#b80223;">查看备注</div>
+          <div @click="handleAdd(scope.row[item.prop])" class="btn" style="color:#b80223;">查看备注</div>
         </template>
       </el-table-column>
       <el-table-column align="left" fixed="right" v-else-if="item.template == 'jump'" :label="item.label" :width="140">
         <template slot-scope="scope">
-          <div @click="jumpPage(item.url)" class="btn" style="color:#b80223;">{{item.title}}</div>
+          <div @click="jumpPage(scope.row[item.prop])" class="btn" style="color:#b80223;">{{item.title}}</div>
         </template>
       </el-table-column>
-      <!-- 展开行 -->
-      <el-table-column type="expand" v-else-if="item.template == 'expand'" :label="item.label">
-        <template slot-scope="props">
-          <p style="line-height:2;">{{props.row.name | couponRule}}</p>
+      
+      <!-- 展开行 优惠券详情-->
+      <el-table-column type="expand" v-else-if="item.template == 'couponContent' && item.expand" :label="item.label">
+        <template slot-scope="scope">
+          <p style="line-height:2;" v-html="couponContent(scope.row[item.prop])"></p>
+          <!-- {{scope.row[item.prop] | couponContent(2)}} -->
+        </template>
+      </el-table-column>
+      <!-- 优惠券标题 -->
+      <el-table-column  v-else-if="item.template == 'couponContent'" :label="item.label">
+        <template slot-scope="scope">
+          <p style="line-height:2;">{{scope.row[item.prop] | couponContent(1)}}</p>
+        </template>
+      </el-table-column>
+      <!-- 导购状态 -->
+      <el-table-column  v-else-if="item.template == 'guideState'" :label="item.label" :width="item.width">
+        <template slot-scope="scope">
+          <span>{{scope.row[item.prop] | guideState}}</span>
         </template>
       </el-table-column>
       <!--日期 -->
@@ -120,12 +134,12 @@
       </el-pagination>
     </div>
     <el-dialog title="备注" :visible.sync="dialogTableVisible" append-to-body>
-      <el-table :data="tableData" border>
-        <el-table-column property="date" label="时间" width="150"></el-table-column>
-        <el-table-column property="name" label="导购" width="100"></el-table-column>
-        <el-table-column property="address" label="内衣尺寸" width="100"></el-table-column>
-        <el-table-column property="address" label="内裤尺寸" width="100"></el-table-column>
-        <el-table-column property="address" label="内容"></el-table-column>
+      <el-table :data="mark" border>
+        <el-table-column property="createTime" label="时间" width="150"></el-table-column>
+        <el-table-column property="employeeName" label="导购" width="120"></el-table-column>
+        <el-table-column property="barSize" label="内衣尺寸" width="100"></el-table-column>
+        <el-table-column property="pantySize" label="内裤尺寸" width="100"></el-table-column>
+        <el-table-column property="remark" label="内容"></el-table-column>
       </el-table>
     </el-dialog>
     <!-- <dig-qrcode :visible="digQrcode" :imgUrl="row[item.prop]" @close="checkQrcode"></dig-qrcode> -->
@@ -167,6 +181,7 @@ export default {
         size: 20,
         curPage: 1
       },
+      mark: [],
       digQrcode: false,
       tableRow: {},
       tHeight: 0
@@ -185,10 +200,27 @@ export default {
     });
   },
   filters: {
+    couponContent(val, type) {
+      if(!val) return '';
+      let regTitle = /.*\s/; // 匹配标题
+      let regDetail = /\s[0-9].*/g; // 匹配详情
+      if(type === 1) {
+        return val.match(regTitle)[0];
+      }else if(type === 2){
+        val = val.replace(/；/g,'；\n');
+        val = val.match(regDetail).join('');
+        return val.replace(/；/g, '；<br>');
+      }
+    },
     // 优惠券规则
-    couponRule(val) {
-      if (val === '') return '';
-      return val.replace(/;/g, ';<br>')
+    guideState(val) {
+      if (!val) return '';
+      switch (val) {
+        case 1:
+          return "在职";
+        case 2:
+          return "离职";
+      }
     },
     // 业务员审核
     disAudit(val) {
@@ -334,6 +366,13 @@ export default {
       if (tongji) this.tHeight = this.tHeight - tongji.offsetHeight;
       if (this.isDetail) this.tHeight = this.tHeight - 50;
     },
+    couponContent(val) {
+      // 优惠券详情
+      let regDetail = /\s[0-9].*/g; // 匹配详情
+      val = val.replace(/；/g,'；\n');
+      val = val.match(regDetail).join('');
+      return val.replace(/；/g, '；<br>');
+    },
     // 表单请求接口地址
     apiTable(url, search) {
       this.loading = true;
@@ -408,12 +447,18 @@ export default {
       setTableId: "TABLEID"
     }),
     // 跳转
-    jumpPage(url) {
-      console.log(url)
-      this.$router.push('/main/shop/table')
+    jumpPage(id) {
+      this.$router.push(`/main/shop/table?shopId=${id}`)
     },
-    handleAdd(row) {
+    handleAdd(id) {
       this.dialogTableVisible = true;
+      this.$http.get('/reservation/remark', {reservationId: id})
+      .then(res => {
+        console.log(res.data.content0)
+        this.mark = []
+        this.mark.push(res.data.content0)
+        if(this.mark[0].createTime) this.mark[0].createTime = this.mark[0].createTime.substr(0,16);
+      })
     }
   },
   destroyed() {

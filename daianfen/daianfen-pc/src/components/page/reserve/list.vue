@@ -4,7 +4,7 @@
       <search-wrap>
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item label="">
-            <el-input size="small" placeholder="专柜" v-model="searchData.name"></el-input>
+            <el-input size="small" placeholder="专柜" v-model="searchData.shopName"></el-input>
           </el-form-item>
           <el-form-item label="">
             <el-select v-model="searchData.status" size="small" placeholder="请选择">
@@ -17,10 +17,10 @@
             </el-select>
           </el-form-item>
           <el-form-item label="">
-            <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.name" type="date" placeholder="开始时间"></el-date-picker>
+            <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.startDate" type="date" placeholder="开始时间"></el-date-picker>
           </el-form-item>
           <el-form-item label="">
-            <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.name" type="date" placeholder="结束时间"></el-date-picker>
+            <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.endDate" type="date" placeholder="结束时间"></el-date-picker>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="small" @click="search()">查询</el-button>
@@ -58,20 +58,19 @@ export default {
       searchData: {
         // curPage: '1',
         // size: '20',
-        // startDate: '2018-04-21',
-        // endDate: '2018-05-21',
+        startDate: '',
+        endDate: '',
         status: 1,
         shopName: ''
       },
       showData: [
-        { prop: "logUrl", label: "头像", template: "img", isPrefix: true },
-        { prop: "name", label: "姓名" },
-        { prop: "code", label: "手机" },
-        { prop: "customerName", label: "状态" },
-        { prop: "remark", label: "专柜" },
-        { prop: "endDate", label: "预约日期" },
-        { prop: "createTime", label: "预约时间" },
-        { prop: "name", label: "操作", template: 'mark'}
+        { prop: "img_url", label: "头像", template: "img", headImage: true },
+        { prop: "member_name", label: "姓名" },
+        { prop: "phone_no", label: "手机" },
+        { prop: "shop_name", label: "专柜" },
+        { prop: "reservation_date", label: "预约日期" },
+        { prop: "reservation_time", label: "预约时间" },
+        { prop: "id", label: "操作", template: 'mark'}
       ]
     };
   },

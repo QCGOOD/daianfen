@@ -25,7 +25,7 @@
     <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" url="/shop/list"></qc-table>
   
     <el-dialog :title="updateId?'修改':'新建'" :visible.sync="dialogFormVisible" append-to-body @close="digClose()">
-      <el-form :model="model" :rules="rules" label-width="100px" style="width:500px;margin:0 auto;">
+      <el-form :model="model" ref="model" :rules="rules" label-width="100px" style="width:500px;margin:0 auto;">
         <el-form-item label="编号" prop="shopNo">
           <el-input v-model="model.shopNo"></el-input>
         </el-form-item>
@@ -57,7 +57,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="digClose()">取 消</el-button>
-        <el-button type="primary" @click="digClose()">确 定</el-button>
+        <el-button type="primary" @click="submit()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -89,14 +89,14 @@ export default {
         city: '',
       },
       showData: [
-        { prop: "name", label: "编号", width:150, align: 'left'},
-        { prop: "code", label: "专柜", width:200, align: 'left'},
-        { prop: "customerName", label: "渠道", width:100, align: 'left'},
-        { prop: "remark", label: "省份", width:100, align: 'left'},
-        { prop: "endDate", label: "城市", width:100, align: 'left'},
-        { prop: "createTime", label: "区县", width:120, align: 'left'},
-        { prop: "createTime", label: "地址", align: 'left'},
-        { prop: "createTime", label: "操作", title: '查看预约', url:'/mian/guide', template: 'jump'},
+        { prop: "shopNo", label: "编号", width:150, align: 'center'},
+        { prop: "shopName", label: "专柜", width:200, align: 'left'},
+        { prop: "shopType", label: "渠道", width:100, align: 'left'},
+        { prop: "province", label: "省份", width:100, align: 'left'},
+        { prop: "city", label: "城市", width:100, align: 'left'},
+        { prop: "area", label: "区县", width:120, align: 'left'},
+        { prop: "address", label: "地址", align: 'left'},
+        { prop: "id", label: "操作", title: '查看预约', url:'/mian/guide', template: 'jump'},
       ],
       rules: {
         shopNo: [
@@ -131,6 +131,7 @@ export default {
       this.$http.post('/shop/add', data)
       .then(res => {
         this.$message.success('提交成功')
+        this.searchKeep()
         this.digClose()
       })
     },
@@ -162,7 +163,7 @@ export default {
     update() {
       this.updateId = this.tableList.id;
       this.dialogFormVisible = true;
-      this.model = this.tableList
+      this.model = JSON.parse(JSON.stringify(this.tableList))
     },
     digClose(flag) {
       this.updateId = "";
@@ -181,6 +182,8 @@ export default {
     submit() {
       this.$refs.model.validate(valid => {
         if (valid) {
+        if(this.model.createTime) delete this.model.createTime
+        if(this.model.updateTime) delete this.model.updateTime
           this.apiAddData(this.model);
         } else {
           this.loading = false;

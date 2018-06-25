@@ -7,7 +7,8 @@
       :data="data"
       accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       :before-upload="beforeFileUpload">
-      <el-button :size="size" type="info" :disabled="id == null">{{title}}</el-button>
+      <el-button :size="size" type="info" >{{title}}</el-button>
+      <!-- :disabled="id == null" -->
     </el-upload>
   </div>
 </template>
@@ -54,14 +55,14 @@ export default {
       return type;
     },
     fileSuccess(res) {
-      if (res.code === 20000) {
+      if (res.errCode === 0) {
         this.$message({
           message: "导入成功",
           type: "success"
         });
       } else {
         this.$message({
-          message: res.message,
+          message: res.errMsg,
           type: "error"
         });
       }

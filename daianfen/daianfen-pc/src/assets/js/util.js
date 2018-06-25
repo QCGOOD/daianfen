@@ -153,7 +153,9 @@ let Utils = {
   yesterday() {
     var day1 = new Date();
     day1.setTime(day1.getTime() - 24 * 60 * 60 * 1000);
-    var s1 = day1.getFullYear() + "-" + (day1.getMonth() + 1) + "-" + day1.getDate();
+    let month = (day1.getMonth() + 1) < 10 ? '0' + (day1.getMonth() + 1) : (day1.getMonth() + 1)
+    let day = day1.getDate() < 10 ? '0' + day1.getDate() : day1.getDate()
+    var s1 = day1.getFullYear() + "-" + month + "-" + day;
     return s1;
   },
   //返回val的字节长度

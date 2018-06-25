@@ -5,7 +5,8 @@ import activity2 from './activity2';
 import activity from './activity';
 import lesson from './lesson';
 import level from './level';
-import app from './app';
+import reserve from './reserve';
+import statistical from './statistical';
 import power from './power';
 import coupon from './coupon';
 import reserveSetting from './reserveSetting';
@@ -36,8 +37,11 @@ export default new Router({
       component: () =>
         import ('@/components/page/main/index'),
       children: [
-        // 应用管理
-        ...app,
+        // 预约管理
+        ...reserve,
+
+        // 数据统计管理
+        ...statistical,
         
         // 权限管理
         ...power,

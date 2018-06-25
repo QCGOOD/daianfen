@@ -52,7 +52,7 @@ export default {
         .then(res => {
           this.$message.success('登录成功');
           setTimeout(() => {
-            this.$router.push("/main/app");
+            this.$router.push("/main/statistical");
           }, 500)
         })
         .catch(err => {
@@ -129,7 +129,7 @@ export default {
       .form {
         padding: 10px 20px 0px 20px;
         margin-top:58px;
-        background:rgba(255,255,255,.2);
+        // background:rgba(255,255,255,.2);
         overflow:hidden;
         .button {
           width: 100%;

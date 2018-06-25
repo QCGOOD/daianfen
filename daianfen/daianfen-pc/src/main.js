@@ -11,11 +11,14 @@ import util from './assets/js/util'
 import base from './assets/js/base'
 import http from "./api/http";
 import qs from "qs";
+import echarts from 'echarts'
+import 'zrender/lib/svg/svg';
 
 Vue.use(ElementUI)
 
-Vue.prototype.imgHost = 'http://triumph-1255600302.file.myqcloud.com'
-Vue.prototype.localhost = process.env.NODE_ENV == 'production' ? `https://triumph.wego168.com/triumph/admin` : '/api';
+Vue.prototype.imgHost = 'http://triumph-1255600302.file.myqcloud.com';
+Vue.prototype.localhost = process.env.NODE_ENV == 'production' ? `https://triumph.wego168.com/triumph/admin` : '/triumph/admin';
+Vue.prototype.echarts = echarts;
 
 Vue.prototype.$http = http
 Vue.prototype.qs = qs

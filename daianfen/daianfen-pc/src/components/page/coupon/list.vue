@@ -4,13 +4,13 @@
       <search-wrap>
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item label="">
-            <el-input size="small" placeholder="起始编号" v-model="searchData.name"></el-input>
+            <el-input size="small" placeholder="起始编号" v-model="searchData.startNo"></el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-input size="small" type="number" maxlength="11" placeholder="手机" v-model.number="searchData.name"></el-input>
+            <el-input size="small" type="number" maxlength="11" placeholder="手机" v-model.number="searchData.phoneNo"></el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-select v-model="searchData.status" size="small" placeholder="请选择">
+            <el-select v-model="searchData.useState" size="small" placeholder="请选择">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -48,16 +48,17 @@ export default {
         // size: '20',
         // startDate: '2018-04-21',
         // endDate: '2018-05-21',
-        status: 0,
-        shopName: ''
+        phoneNo: '',
+        startNo: '',
+        useState: 0,
       },
       showData: [
-        { prop: "content", label: "", template: 'expand' },
+        { prop: "content", label: "", template: 'couponContent', expand: true },
         { prop: "couponsNo", label: "编号" },
         { prop: "par", label: "金额" },
         { prop: "useState", label: "状态" },
         { prop: "receiveTime", label: "领取时间" },
-        { prop: "title", label: "标题" },
+        { prop: "content", label: "标题", template: 'couponContent' },
         { prop: "phoneNo", label: "手机" },
       ]
     };

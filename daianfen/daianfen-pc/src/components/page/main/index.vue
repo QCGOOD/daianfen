@@ -15,8 +15,6 @@
           <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <!-- <el-button type="text" @click="digShow = true">修改密码</el-button>
-      <el-button type="text" style="margin-right: 50px;" @click="logout">退出</el-button> -->
       </div>
     </div>
     <div class="main">
@@ -118,11 +116,11 @@ export default {
           menuList: [
             {
               name: "pv/uv汇总",
-              url: "/main/app",
+              url: "/main/statistical",
             },
             {
               name: "预约汇总",
-              url: "/main/app",
+              url: "/main/statistical/totalReserve",
             },
           ]
         },
@@ -134,7 +132,7 @@ export default {
           menuList: [
             {
               name: "预约记录",
-              url: "/main/app",
+              url: "/main/reserve",
             },
           ]
         },
@@ -266,14 +264,28 @@ export default {
         }
       });
     },
+    apiLogout() {
+      this.$http.get('/logout').then(res => {
+        this.$router.replace("/login");
+        this.$message.info('已退出')
+      });
+    },
     close() {
       this.digShow = false;
       this.$refs.model.resetFields();
     },
     // 退出
     logout() {
-      this.$http.post('/logout').then(res => {
-        this.$router.replace("/login");
+      this.$confirm(`确认退出登录？`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+      .then(() => {
+        this.apiLogout();
+      })
+      .catch(() => {
+        return;
       });
     }
   }

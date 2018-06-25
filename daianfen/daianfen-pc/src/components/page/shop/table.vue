@@ -22,7 +22,7 @@
         </el-form>
       </search-wrap>
     </div>
-    <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" url="/reservation/list"></qc-table>
+    <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" :url="`/reservation/list?shopId=${$route.query.shopId}`"></qc-table>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
     return {
       options: [
         {value: 1,label: '已预约'},
-        {value: 2,label: '已使用'},
+        {value: 2,label: '已到店'},
         {value: 3,label: '已取消'},
       ],
       searchData: {
@@ -45,13 +45,13 @@ export default {
         shopId: ''
       },
       showData: [
-        { prop: "logUrl", label: "头像", template: "img", isPrefix: true },
-        { prop: "name", label: "姓名" },
-        { prop: "code", label: "手机" },
-        { prop: "remark", label: "专柜" },
-        { prop: "endDate", label: "预约日期" },
-        { prop: "createTime", label: "预约时间" },
-        { prop: "name", label: "操作", template: 'mark'}
+        { prop: "img_url", label: "头像", template: "img", headImage: true },
+        { prop: "member_name", label: "姓名" },
+        { prop: "phone_no", label: "手机" },
+        { prop: "shop_name", label: "专柜" },
+        { prop: "reservation_date", label: "预约日期" },
+        { prop: "reservation_time", label: "预约时间" },
+        { prop: "id", label: "操作", template: 'mark'}
       ]
     };
   },

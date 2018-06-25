@@ -10,24 +10,24 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': {
-      //   // target: 'http://192.168.1.32:8180/athena-app/',
-      //   // target: 'http://192.168.1.32:8180',
-      //   // target: 'https://triumph.wego168.com/triumph/admin',
-      //   target: 'http://192.168.1.18:80/triumph/admin',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // },
+      '/api': {
+        // target: 'http://192.168.1.32:8180/athena-app/',
+        // target: 'http://192.168.1.32:8180',
+        target: 'https://triumph.wego168.com/triumph/admin',
+        // target: 'http://192.168.1.18:80/triumph/admin',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
       '/triumph/admin': {
         // target: 'http://192.168.1.70:8080/',
         // target: 'http://192.168.1.18:80/',
-        target: 'http://192.168.1.32:8080/',
-        // target: 'http://abs.wego168.com/',
+        // target: 'http://192.168.1.32:8080/',
+        target: 'https://triumph.wego168.com/',
         changeOrigin: true,
         pathRewrite: {
-          '/triumph/admin': 'triumph/admin'
+          '/triumph/admin': '/triumph/admin'
         }
       },
     },
