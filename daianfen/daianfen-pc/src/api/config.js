@@ -9,7 +9,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; //配置请求头
 let URL = ''
 if (process.env.NODE_ENV === 'production') {
-  URL = location.origin + location.pathname.match(/^\/\w+/g)[0] + '/triumph/admin';
+  URL = location.origin + location.pathname.match(/^\/\w+/g)[0] + '/admin';
 } else {
   URL = '/triumph/admin'
 };

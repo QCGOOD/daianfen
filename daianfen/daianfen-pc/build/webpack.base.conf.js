@@ -29,7 +29,8 @@ module.exports = {
       '@': resolve('src'),
       'common': resolve('src/components/common'),
       'api': path.resolve(__dirname, '../src/api'),
-      'style': path.resolve(__dirname, '../src/assets/styles')
+      'style': path.resolve(__dirname, '../src/assets/styles'),
+      // 'static': path.resolve(__dirname, '../static'),
     }
   },
   module: {

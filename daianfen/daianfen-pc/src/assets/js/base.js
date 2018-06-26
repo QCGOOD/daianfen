@@ -20,7 +20,7 @@ let daianfen = {
   baseHost: 'https://triumph.wego168.com/',
 
   projectName: function () {
-    let name = process.env.NODE_ENV === "production" ? 'triumph/admin' : "/triumph/admin"
+    let name = process.env.NODE_ENV === "production" ? '/admin' : "/triumph/admin"
     return name
   },
   transferMember: true,

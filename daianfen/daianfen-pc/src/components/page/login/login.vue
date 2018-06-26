@@ -1,14 +1,12 @@
 <template>
   <div id="login" class="container">
-    <div class="header">
+    <div class="login-header">
       <div class="logo">
         <img src="../../../../static/images/logo-lg.png" alt="">
       </div>
       <p class="title">预约试穿管理系统</p>
     </div>
-    <!-- :style="`background:url(${require('../../../../static/images/login-bg.png')}) no-repeat`" -->
-    <div class="content" >
-      <!-- :style="`background:url(${require('../../../../static/images/login-bg.png')}) no-repeat 100% 100%`" -->
+    <div class="content" style="background:url(static/images/login-bg.png) no-repeat; background-size:100% 100%;">
       <div class="form-right bottom">
         <!-- <h4 class="title">欢迎登陆</h4> -->
         <el-form :model="model" class="form" :rules="rules" ref="model" label-position="top">
@@ -88,12 +86,13 @@ export default {
   height:100%;
   min-height: 100%;
   overflow:hidden;
-  .header{
+  .login-header{
     width:100%;
     height:40%;
     text-align: center;
     padding:120px 0 0;
     box-sizing: border-box;
+    background:#fff;
     .logo{
       width:400px;
       height:250px;
@@ -113,9 +112,6 @@ export default {
     width:100%;
     height: 60%;
     background-color:#b80223;
-    background-size:100% 100%;
-    background:url(../../../../static/images/login-bg.png) no-repeat;
-    background-size:100% 100%;
     .form-right {
       width: 450px;
       box-sizing: border-box;
