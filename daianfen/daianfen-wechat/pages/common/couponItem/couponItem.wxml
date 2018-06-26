@@ -17,7 +17,10 @@
       </view>
       <view class="coupon-detail {{ item.open?'coupon-detail-show':'' }}">
          <text class="detail-text">{{item.detail?item.detail:''}}</text>
-         <image class="image" src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
+         <!-- 条形码 -->
+         <image class="tiao-img" wx:if="item.couponsBreed == 1" src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
+         <!-- 二维码 -->
+         <image class="qr-img" wx:else src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
          <!-- <image class="image" src="../../../static/images/tiaoxingma.png"></image> -->
          <text class="code" selectable>{{item.couponsNo}}</text>
       </view>

@@ -113,8 +113,16 @@
    word-wrap: break-word;
    margin:30rpx 30rpx 0;
  }
- .coupon-item .coupon-detail .image{
+ /* 条形码 */
+ .coupon-item .coupon-detail .tiao-img{
    width:600rpx;
+   height:130rpx;
+   margin: 40rpx auto 0;
+   text-align: center;
+ }
+ /* 二维码 */
+ .coupon-item .coupon-detail .qr-img{
+   width:130rpx;
    height:130rpx;
    margin: 40rpx auto 0;
    text-align: center;
