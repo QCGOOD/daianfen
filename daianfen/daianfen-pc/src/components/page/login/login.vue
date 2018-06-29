@@ -87,16 +87,20 @@ export default {
   min-height: 100%;
   overflow:hidden;
   .login-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width:100%;
     height:40%;
     text-align: center;
-    padding:120px 0 0;
     box-sizing: border-box;
     background:#fff;
+    overflow: hidden;
     .logo{
       width:400px;
       height:250px;
-      margin:0 auto;
+      margin:2% auto 0;
       img{
         width:auto;
         max-width:100%;
@@ -112,6 +116,7 @@ export default {
     width:100%;
     height: 60%;
     background-color:#b80223;
+    overflow: hidden;
     .form-right {
       width: 450px;
       box-sizing: border-box;
@@ -124,7 +129,7 @@ export default {
       }
       .form {
         padding: 10px 20px 0px 20px;
-        margin-top:58px;
+        margin-top:30px;
         // background:rgba(255,255,255,.2);
         overflow:hidden;
         .button {

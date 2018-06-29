@@ -27,6 +27,8 @@ Page({
     // 是否打开选择框
     showDate: false,
     showTime: false,
+    // 是否可提交
+    canISubmit: true
   },
 
   onLoad: function (options) {
@@ -101,6 +103,8 @@ Page({
 
   // 提交表单数据
   submitFormData(e) {
+    // 阻止连续提交
+    if(!this.data.canISubmit) return false;
     let shopId = this.data.shopId;
     let date = this.data.date;
     let time = this.data.time;
@@ -164,6 +168,9 @@ Page({
 
   // 预约
   apiPostReserve() {
+    // 阻止连续提交
+    this.setData({canISubmit: false});
+    wx.showLoading({title: '加载中…'})
     let data = this.data;
     let params = {
         shopId: data.shopId,
@@ -179,6 +186,7 @@ Page({
           this.apiPostReserve(params)
         });
       } else if (res.data.errCode == 0) {
+
         this.setData({ reserveId: res.data.content0.reservationId})
         // this.apiSaveUserInfo()
         wx.redirectTo({
@@ -190,7 +198,10 @@ Page({
           icon: 'none'
         })
       }
-    })
+    }).finally(() => {
+      this.setData({canISubmit: true})
+      wx.hideLoading()
+    });
   },
 
   // 获取时间

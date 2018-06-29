@@ -6,11 +6,11 @@
       <image hidden="{{state != 3}}" class="coupon-bg" src="../../../static/images/gray.png"></image>
       <view class="coupon-top">
          <text class="text" style="font-size:28rpx;">编号：{{item.couponsNo}}</text>
-         <text class="text" style="font-size:70rpx;font-weight:bold;margin:40rpx 0;">￥{{item.par}}</text>
-         <!-- <text class="text" style="font-size:26rpx;">{{item.title?item.title:''}}</text> -->
+         <text class="text" style="font-size:70rpx;font-weight:bold;margin:20rpx 0;">￥{{item.par}}</text>
+         <text class="text" style="font-size:26rpx;">{{item.title?item.title:''}}</text>
          <text class="right-bottom">{{item.couponsType}}</text>
       </view>
-      <text class="state-text">{{item.useState}}</text>
+      <text class="state-text" wx:if="{{state == 2}}">{{item.useState}}</text>
       <view class="coupon-footer"  data-index="{{index}}" catchtap="detailToggle">
          <text style="font-size:24rpx;">到期日期：{{getFloat.joinDate(item.validDate)}}</text>
          <i class="icon icon-shouqi{{ item.open?'.icon-rotate':'' }}"></i>
@@ -18,11 +18,11 @@
       <view class="coupon-detail {{ item.open?'coupon-detail-show':'' }}">
          <text class="detail-text">{{item.detail?item.detail:''}}</text>
          <!-- 条形码 -->
-         <image class="tiao-img" wx:if="item.couponsBreed == 1" src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
+         <image class="tiao-img" wx:if="{{ item.couponsBreed == 1}}" src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
          <!-- 二维码 -->
-         <image class="qr-img" wx:else src="{{imghead+item.imgUrl}}" mode="widthFix"></image>
+         <image class="qr-img" wx:else src="{{imghead+item.imgUrl}}"></image>
          <!-- <image class="image" src="../../../static/images/tiaoxingma.png"></image> -->
-         <text class="code" selectable>{{item.couponsNo}}</text>
+         <text class="code" wx:if="{{ item.couponsBreed == 1 }}" selectable>{{item.couponsNo}}</text>
       </view>
    </view>
 </block>

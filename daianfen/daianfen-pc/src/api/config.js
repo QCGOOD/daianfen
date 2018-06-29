@@ -30,6 +30,10 @@ axios.interceptors.response.use((success) => {
   if (success.data.errCode == 0) {
     return Promise.resolve(success);
   } else {
+    if(success.data.errCode == 401){
+      Vue.$router.replace('/')
+    }
+    Message.error(res.data.errMsg);
     return Promise.reject(success);
   };
 }, (error) => {

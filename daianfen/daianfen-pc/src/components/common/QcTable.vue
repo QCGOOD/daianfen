@@ -10,7 +10,7 @@
         width="55">
       </el-table-column> -->
       <!--基本的显示  -->
-      <el-table-column v-for="(item,index) in tableList" :key="index" :align="item.align || 'center'" v-if="!item.template" :prop="item.prop" :label="item.label" :width="item.width">
+      <el-table-column v-for="(item,index) in tableList" :key="index" :align="item.align || 'center'" show-overflow-tooltip v-if="!item.template" :prop="item.prop" :label="item.label" :width="item.width">
       </el-table-column>
       <!--序号  -->
       <el-table-column align="center" v-else-if="item.template == 'index'" type="index" label="序号" width="65">
@@ -72,6 +72,12 @@
           <p style="line-height:2;">{{scope.row[item.prop] | couponContent(1)}}</p>
         </template>
       </el-table-column>
+      <!-- 优惠券来源 -->
+      <el-table-column  v-else-if="item.template == 'couponsBreed'" :label="item.label" :width="item.width">
+        <template slot-scope="scope">
+          <span>{{scope.row[item.prop] | couponsBreed}}</span>
+        </template>
+      </el-table-column>
       <!-- 导购状态 -->
       <el-table-column  v-else-if="item.template == 'guideState'" :label="item.label" :width="item.width">
         <template slot-scope="scope">
@@ -79,10 +85,12 @@
         </template>
       </el-table-column>
       <!--日期 -->
-      <el-table-column :align="item.align || 'center'" v-else-if="item.template =='date'" :label="item.label" :width="item.width" inline-template>
-        <div>
-          {{row[item.prop] | formatData}}
-        </div>
+      <el-table-column :align="item.align || 'center'" v-else-if="item.template =='date'" :label="item.label" :width="item.width">
+        <template slot-scope="scope">
+          <div>
+            {{scope.row[item.prop] | formatData}}
+          </div>
+        </template>
       </el-table-column>
       <!-- 时间范围 -->
       <el-table-column :align="item.align || 'center'" v-else-if="item.template =='timeLimit'" :label="item.label" :width="item.width" inline-template>
@@ -134,7 +142,7 @@
       </el-pagination>
     </div>
     <el-dialog title="备注" :visible.sync="dialogTableVisible" append-to-body>
-      <el-table :data="mark" border>
+      <el-table :data="mark" border show-overflow-tooltip>
         <el-table-column property="createTime" label="时间" width="150"></el-table-column>
         <el-table-column property="employeeName" label="导购" width="120"></el-table-column>
         <el-table-column property="barSize" label="内衣尺寸" width="100"></el-table-column>
@@ -212,15 +220,31 @@ export default {
         return val.replace(/；/g, '；<br>');
       }
     },
+    // 优惠券来源
+    couponsBreed(val) {
+      if (!val) return val;
+      switch (val) {
+        case 1:
+          return "CRM优惠券";
+        case 2:
+          return "系统优惠券";
+      }
+    },
     // 优惠券规则
     guideState(val) {
-      if (!val) return '';
+      if (!val) return val;
       switch (val) {
         case 1:
           return "在职";
         case 2:
           return "离职";
       }
+    },
+    formatData(val) {
+      // 传入格式 年月日 时分秒
+      if(!val) return val;
+      if(val.length < 16) return val;
+      return val.substr(0, 16)
     },
     // 业务员审核
     disAudit(val) {

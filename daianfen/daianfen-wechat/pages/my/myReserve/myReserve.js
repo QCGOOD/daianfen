@@ -75,11 +75,11 @@ Page({
 
   // 记录列表
   apiGetReserveList() {
+    wx.showLoading({title: '加载中…'})
     let {page, size, reverseData} = this.data;
     let params = {curPage: page, size: size };
 
     http.get('/reservation/list', params, true).then(res => {
-      wx.showLoading()
       // console.log(res.data)
       if (res.data.errCode == 401) {
         app.login(() => {
@@ -95,20 +95,17 @@ Page({
         // 分页
         pageView(this, page, size, 'reverseData', reverseData, resData, total);
 
-        setTimeout(() => {
-          wx.hideLoading();
-        }, 300);
-        
       }else{
         wx.showTost({
           title: res.data.message, 
           icon: 'none'
         })
-        setTimeout(() => {
-          wx.hideLoading();
-        }, 300);
       }
-    })
+    }).finally(() => {
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 500);
+    });
   },
 
    // 下拉刷新

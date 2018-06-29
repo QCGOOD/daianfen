@@ -20,8 +20,20 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="起始编号" prop="startNo">
+        <el-form-item label="优惠券来源" prop="couponsBreed">
+          <el-select v-model="model.couponsBreed" placeholder="请选择">
+            <el-option v-for="item in optionSource" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="起始编号" v-show="model.couponsBreed == 1" prop="startNo">
           <el-input v-model="model.startNo" style="width:210px;"></el-input>
+        </el-form-item>
+        <el-form-item label="优惠券规则" v-show="model.couponsBreed == 2" prop="makeCouponsId">
+          <el-select v-model="model.makeCouponsId" placeholder="请选择">
+            <el-option v-for="item in ruleList" :key="item.id" :label="item.title" :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="有效期天数" prop="validDate">
           <el-input v-model="model.validDate" placeholder="请输入数值" style="width:210px;"></el-input>
@@ -30,10 +42,10 @@
           <el-input-number style="margin-left:3px;" v-model="model.sendCount"  :min="1"></el-input-number>
         </el-form-item>
         <el-form-item label="开始时间" prop="startDate">
-          <el-date-picker size="small" value-format="yyyy-MM-dd hh:mm" format="yyyy-MM-dd hh:mm" v-model="model.startDate" type="datetime" placeholder="开始时间"></el-date-picker>
+          <el-date-picker size="small" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm" v-model="model.startDate" type="datetime" placeholder="开始时间"></el-date-picker>
         </el-form-item>
         <el-form-item label="结束时间" prop="endDate">
-          <el-date-picker size="small" value-format="yyyy-MM-dd hh:mm" format="yyyy-MM-dd hh:mm" v-model="model.endDate" type="datetime" placeholder="开始时间"></el-date-picker>
+          <el-date-picker size="small" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm" v-model="model.endDate" type="datetime" placeholder="结束时间"></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -55,17 +67,34 @@ export default {
     return {
       updateId: "",
       dialogFormVisible: false,
-      model: {sendCount: 1, ruleType: 1},
+      model: {
+        title: '',
+        startDate: '',
+        endDate: '',
+        startNo: '',
+        sendCount: 1, 
+        ruleType: 1, 
+        couponsBreed: 1,
+        makeCouponsId: ''
+      },
       searchData: {},
       options: [
         {label: '预约', value: 1, disabled: false},
         {label: '注册', value: 2, disabled: true}
       ],
+      optionSource: [
+        {label: 'CRM优惠券', value: 1, disabled: false},
+        {label: '系统优惠券', value: 2, disabled: false}
+      ],
+      ruleList: [
+        {label: 'CRM优惠券', value: 1, disabled: false},
+        {label: '系统优惠券', value: 2, disabled: false}
+      ],
       showData: [
         { prop: "title", label: "标题"},
         { prop: "startNo", label: "起始编号"},
-        { prop: "startDate", label: "开始时间"},
-        { prop: "endDate", label: "结束时间"},
+        { prop: "startDate", label: "开始时间", template: 'date'},
+        { prop: "endDate", label: "结束时间", template: 'date'},
       ],
       rules: {
         title: [
@@ -74,8 +103,14 @@ export default {
         ruleType: [
           { required: true, message: '字段不能为空', trigger: 'blur' }
         ],
+        couponsBreed: [
+          { required: false, message: '字段不能为空', trigger: 'blur' }
+        ],
         startNo: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
+          { required: false, message: '字段不能为空', trigger: 'blur' }
+        ],
+        makeCouponsId: [
+          { required: false, message: '字段不能为空', trigger: 'blur' }
         ],
         validDate: [
           { required: true, message: '字段不能为空', trigger: 'blur' }
@@ -93,17 +128,26 @@ export default {
     };
   },
   watch: {
-   
+    
+  },
+  mounted() {
+    this.apiGetRuleList()
   },
   methods: {
     apiAddData(data) {
-      data.startDate += ':00';
-      data.endDate += ':00';
+      // data.startDate += ':00';
+      // data.endDate += ':00';
       this.$http.post('/couponsRule/save', data)
       .then(res => {
         this.$message.success('提交成功')
         this.digClose()
         this.searchKeep();
+      })
+    },
+    apiGetRuleList() {
+      this.$http.get('/makeCoupons/list')
+      .then(res => {
+        this.ruleList = res.data.content0.rows
       })
     },
     search(){
@@ -139,14 +183,30 @@ export default {
     digClose(flag) {
       this.updateId = "";
       this.dialogFormVisible = false;
-      this.model = {}
+      this.model = {
+        title: '',
+        startDate: '',
+        endDate: '',
+        startNo: '',
+        sendCount: 1, 
+        ruleType: 1, 
+        couponsBreed: 1,
+        makeCouponsId: ''
+      }
     },
     // 提交
     submit() {
       this.$refs.model.validate(valid => {
         if (valid) {
+          delete this.model.createTime
+          delete this.model.updateTime
+          delete this.model.remainQty
+          delete this.model.sendQty
+          delete this.model.totalQty
+          delete this.model.state
           this.apiAddData(this.model);
         } else {
+          this.$message.warning('输入信息有误')
           this.loading = false;
         }
       });

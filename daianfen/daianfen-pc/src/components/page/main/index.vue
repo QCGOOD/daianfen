@@ -162,9 +162,17 @@ export default {
         {
           name: "优惠券管理",
           menuList: [
+            // {
+            //   name: "优惠券列表",
+            //   url: "/main/coupon/couponList",
+            // },
             {
-              name: "优惠券列表",
+              name: "领取列表",
               url: "/main/coupon",
+            },
+            {
+              name: "制券规则",
+              url: "/main/coupon/ruleList",
             },
           ]
         },

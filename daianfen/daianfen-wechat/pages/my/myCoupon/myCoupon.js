@@ -12,6 +12,7 @@ Page({
   data: {
     layoutHeight: app.globalData.layoutHeight,
     imgHead: app.globalData.imgHead,
+    isRequst: false,
     state: 2,
     open: false,
     couponList: [],
@@ -49,13 +50,12 @@ Page({
   
   // 优惠券列表
   apiGetCouponList() {
-
+    wx.showLoading({title: '加载中…'})
+    this.setData({isRequst: false})
     let {state, page, size, couponList} = this.data;
     let params = { useState: state, curPage: page, size: size };
-
     http.get('/coupons/list', params, true).then(res => {
-      wx.showLoading()
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.errCode == 401) {
         app.login(() => {
           this.apiGetCouponList()
@@ -78,14 +78,9 @@ Page({
           item.content = item.content = item.content.replace(/；/g,'；\n');
           item.detail = item.content.match(regDetail).join('');
         })
-        // Array.from(item.detail)
 
         // 分页
         pageView(this, page, size, 'couponList', couponList, resData, total);
-
-        setTimeout(() => {
-          wx.hideLoading();
-        }, 300);
         
       }else{
         wx.showTost({
@@ -93,7 +88,12 @@ Page({
           icon: 'none'
         })
       }
-    })
+    }).finally(() => {
+      setTimeout(() => {
+        this.setData({isRequst: true})
+        wx.hideLoading()
+      }, 300);
+    });
   },
 
   // 下拉刷新

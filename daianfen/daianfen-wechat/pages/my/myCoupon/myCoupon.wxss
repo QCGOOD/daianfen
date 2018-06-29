@@ -10,7 +10,14 @@ page{
   color: transparent;
 }
 .null{
+  /* width:100%;
+  text-align: center;
+  color:#808080; */
+  position: absolute;
+  top:40%;
+  left:50%;
   width:100%;
+  transform:translate(-50%,-40%);
   text-align: center;
   color:#808080;
 }
