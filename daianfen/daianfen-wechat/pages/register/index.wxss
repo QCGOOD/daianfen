@@ -1,0 +1,102 @@
+page{
+  background-color: #f2f2f2;
+}
+.content{
+  background-color: #fff;
+}
+.section{
+  padding: 0 30rpx;
+  font-size: 28rpx;
+}
+.section:first-child{
+  padding-top: 30rpx;
+}
+.section .s-item{
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  height: 80rpx;
+  padding:0 20rpx;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 0rpx 30rpx;
+  
+}
+.section .s-item .label{
+  padding-right: 20rpx;
+}
+.section .s-item input{
+  flex: 1;
+  color: #808080;
+}
+.section .s-item .send-code{
+  display: inline-block;
+  height: 80rpx;
+  color: #b80223;
+  line-height: 80rpx;
+  margin-left: 15rpx;
+}
+
+/* 尺码列表 */
+.section .size-list{
+  /* margin: 20rpx 30rpx; */
+  margin-top: 20rpx;
+}
+
+.section .size-list .size-item{
+  display: inline-block;
+  width: 80rpx;
+  /* height: 50rpx; */
+  line-height: 2.3;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 22rpx;
+  color: #808080;
+  margin-right: 67rpx;
+  margin-bottom: 20rpx;
+}
+.section .size-list .size-item:nth-child(5n){
+  margin-right: 0;
+}
+.section.panty{
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+/*  选中状态 */
+.active{
+  position: relative;
+  border-color: #0f9f20 !important;
+}
+.active::after{
+  content: "";
+  position: absolute;
+  top: -1rpx;
+  right: -2rpx;
+  height: 0;
+  width: 0;
+  border-top: 30rpx solid #0f9f20;
+  /* border-top: 4vw solid @theme-color; */
+  border-right: 30rpx solid transparent;
+  border-bottom: 30rpx solid transparent;
+  transform: rotateY(180deg);
+  color: #fff;
+}
+.active::before{
+  content: "✔";
+  position: absolute;
+  top: -14rpx;
+  right: -1rpx;
+  font-size: 20rpx;
+  color: #fff;
+  z-index: 10;
+}
+
+.bottom-btn{
+  overflow: hidden;
+}
+.btn{
+  background-color: #b80223;
+  margin: 90rpx 30rpx;
+  color: #fff;
+  
+}

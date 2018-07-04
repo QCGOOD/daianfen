@@ -1,0 +1,34 @@
+<view class="content">
+  <view class="section">
+    <view class="s-item">
+      <text class="label">姓名 :</text>
+      <input type="text" data-key="uname" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
+    </view>
+    <view class="s-item">
+      <text class="label">手机 :</text>
+      <input type="number" data-key="mobile" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机"/>
+    </view>
+    <view class="s-item">
+      <input type="number" data-key="code" maxlength="6" bindinput="bindKeyInput" placeholder="请输入验证码"/>
+      <text wx:if="{{!isSendCode}}" class="send-code" bindtap="sendCode">获取验证码</text>
+      <text wx:else class="send-code" style="color: #808080;">重新获取{{second}}s</text>
+    </view>
+  </view>
+  <view class="section bar">
+    <view class="title">文胸尺寸</view>
+    <view class="size-list">
+      <text wx:if="{{showMore || index < 14}}" class="size-item {{index == barActive?'active':''}}" wx:for="{{barList}}" wx:key="index" data-size="{{item}}" data-i="{{index}}" bindtap="pickBar">{{item}}</text>
+      <text wx:if="{{showMore}}" class="size-item" style="border: 0;" bindtap="showMore">收起</text>
+      <text wx:if="{{!showMore}}" class="size-item" style="border: 0;" bindtap="showMore">更多</text>
+    </view>
+  </view>
+  <view class="section panty">
+    <view class="title">内裤尺寸</view>
+    <view class="size-list">
+      <text class="size-item {{index == pantyActive?'active':''}}" wx:for="{{pantyList}}" wx:key="index" data-size="{{item}}"  data-i="{{index}}" bindtap="pickPanty">{{item}}</text>
+    </view>
+  </view>
+</view>
+<view class="bottom-btn">
+  <button class="btn" bindtap="submit">注册</button>
+</view>

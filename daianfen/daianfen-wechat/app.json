@@ -1,5 +1,8 @@
 {
   "pages": [
+    
+    "pages/register/index",
+    
     "pages/index/index",
     "pages/index/bespeakStore/bespeakStore",
     "pages/index/bespeakTime/bespeakTime",

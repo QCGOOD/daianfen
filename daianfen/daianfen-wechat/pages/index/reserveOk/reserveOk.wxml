@@ -1,12 +1,8 @@
 <view class="layout" style="min-height:{{layoutHeight}}px;">
    <view class="header">
-      <!-- <image style="width:300rpx;height:300rpx;" src="../../../static/images/success.png"></image> -->
       <i class="icon icon-yuyuechenggong"></i>
       <view class="success">预约成功</view>
       <view style="color:#808080;">关注"黛安芬官方服务号"获得更多精彩信息</view>
-      <!-- <button open-type="contact" style="display:inline;font-size:26rpx;border:0;padding:0;margin:0;">
-         <view style="color:#808080;">关注"黛安芬官方服务号"获得更多精彩信息</view>
-      </button> -->
    </view>
    <!-- 二维码 -->
    <!-- <view class="qr-wrap" bindtap="closeQR" wx:if="{{openQR}}">
@@ -45,4 +41,12 @@
 <view class="copyright">
    <image src="/static/images/qc-logo.png" class="qc-logo" mode="widthFix"></image>
    <text class="qc-title">技术支持 企成互动</text>
+</view>
+<!-- 注册弹窗 -->
+<view class="dialog" wx:if="{{dialog}}">
+  <view class="reg-img" catchtap="stopCatch">
+    <image src="/static/images/reg.png" mode="widthFix"></image>
+    <view class="close" bindtap="closeDialog">×</view>
+    <navigator class="btn" url="../../register/index">注册</navigator>
+  </view>
 </view>

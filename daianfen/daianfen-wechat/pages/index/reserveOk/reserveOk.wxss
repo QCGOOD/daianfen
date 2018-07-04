@@ -116,3 +116,55 @@ page{
    font-size:28rpx;
    margin:auto;
 }
+
+.dialog{
+  position: fixed;
+	top:0;
+	left:0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:100%;
+	width:100vw;
+	height:100%;
+	height:100vh;
+	background:rgba(0,0,0,.6);
+	z-index:999;
+}
+.dialog .reg-img{
+  position: relative;
+  width: 550rpx;
+  margin-top: -200rpx;
+}
+.dialog .reg-img image{
+  /* width:auto;
+  max-width: 100%; */
+  width: 100%;
+}
+.dialog .reg-img .btn{
+  position: absolute;
+  bottom: 40rpx;
+  left: 50%;
+  width: 230rpx;
+  background-color: #8670c9;
+  border-radius: 40rpx;
+  line-height: 2.5;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  transform: translate(-50%);
+}
+.dialog .reg-img .close{
+  position: absolute;
+  top: 48%;
+  right: -20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 48rpx;
+  font-size: 40rpx;
+  color: #b80223;
+  
+}

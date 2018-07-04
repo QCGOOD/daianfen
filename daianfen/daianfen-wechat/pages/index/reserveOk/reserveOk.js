@@ -12,6 +12,7 @@ Page({
     qrUrl: 'http://triumph-1255600302.file.myqcloud.com/attachments/image/138015363138737362.png',
     imgPath: '',
     openQR: false,
+    dialog: true,
     reserveData: {},
     reserveId: 'c0a8012062cdf7850162ce61b87f0035',
     couponNum: 0,
@@ -30,7 +31,9 @@ Page({
     // this.apiGetReserve(this.data.reserveId)
     // console.log('预约id====>',options.reserveId)
   },
-
+  closeDialog() {
+    this.setData({dialog: false})
+  },
   // 打开二维码弹窗
   openQR() {
     this.setData({openQR: true})
