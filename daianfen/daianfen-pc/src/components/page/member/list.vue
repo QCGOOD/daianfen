@@ -24,9 +24,9 @@
           </el-form-item>
         </el-form>
       </search-wrap>
-      <!-- <button-wrap v-if="base.transferMember">
-        <el-button type="primary" size="mini" :disabled="tableList.id == null || tableList.distributer !== undefined" @click="transfer()">会员转业务员</el-button>
-      </button-wrap> -->
+      <button-wrap v-if="base.transferMember">
+        <el-button type="primary" size="mini" :disabled="tableList.id == null" @click="update()">修改</el-button>
+      </button-wrap>
     </div>
     <qc-table ref="table" :table-list="showData" :search="searchData" url="/member/page"></qc-table>
     <dig-form :visible='digFormWrap' :id="updateId" @close="digClose"></dig-form>
@@ -46,7 +46,6 @@ export default {
     return {
       updateId: "",
       digFormWrap: false,
-      a: undefined,
       searchData: {
         name: "",
         phoneNo: "",
@@ -71,6 +70,10 @@ export default {
     
   },
   methods: {
+    update() {
+      this.updateId = this.tableList.id;
+      this.digFormWrap = true;
+    },
     transfer() {
       this.updateId = this.tableList.id;
       this.digFormWrap = true;

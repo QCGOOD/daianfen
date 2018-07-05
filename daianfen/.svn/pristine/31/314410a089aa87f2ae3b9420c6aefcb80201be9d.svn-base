@@ -1,8 +1,0 @@
-{
-   "navigationBarTitleText": "优惠券",
-   "enablePullDownRefresh": true, 
-   "usingComponents": {
-      "margin-top": "/pages/common/marginTop/marginTop",
-      "coupon-item": "/pages/common/couponItem/couponItem"
-    }
-}

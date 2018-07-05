@@ -1,12 +1,12 @@
 <template>
-<el-dialog title='分销者' :visible.sync="visible" width="880px" :append-to-body="true" :before-close="close" :close-on-click-modal="false" :close-on-press-escape="false">
+<el-dialog title='修改资料' :visible.sync="visible" width="880px" :append-to-body="true" :before-close="close" :close-on-click-modal="false" :close-on-press-escape="false">
   <div style="overflow: auto;">
     <el-form :model="model" ref="model" class="new-form">
-      <el-form-item label="登录用户名" prop="username" :rules="[{ required: true, message: '该字段不能为空'}]">
-        <el-input size="small" v-model="model.username"></el-input>
+      <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '该字段不能为空'}]">
+        <el-input size="small" v-model="model.name"></el-input>
       </el-form-item>
-      <el-form-item label="登录密码" prop="password" :rules="[{ required: true, message: '该字段不能为空'}]">
-        <el-input size="small" v-model="model.password"></el-input>
+      <el-form-item label="手机" prop="phoneNo" :rules="[{ required: true, message: '该字段不能为空'}]">
+        <el-input size="small" v-model="model.phoneNo"></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       model: {
-        username: "",
-        password: "",
+        name: "",
+        phoneNo: "",
         memberId: "",
       }
     };
