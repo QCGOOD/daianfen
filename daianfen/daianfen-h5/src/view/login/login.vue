@@ -96,7 +96,7 @@ export default {
       this.$http.post('/login', data)
       .then(res => {
         this.toast('登录成功')
-        sessionStorage.setItem('userInfo', JSON.stringify(res.data.content0))
+        localStorage.setItem('userInfo', JSON.stringify(res.data.content0))
         setTimeout(() => {
           this.$router.replace('/index')
         }, 500)

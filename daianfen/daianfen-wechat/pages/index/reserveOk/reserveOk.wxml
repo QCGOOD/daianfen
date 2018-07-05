@@ -29,7 +29,7 @@
       </view>
       <view class="info-item">
          <i class="icon icon-yuyueshijian"></i>
-         <text class="value" >{{reserveData.reservationDate +' '+ reserveData.reservationTime}}</text>
+         <text class="value" >{{reserveData.reservationDate}} {{reserveData.reservationTime}}</text>
       </view>
       <view class="info-item">
          <i class="icon text-top icon-zhuanguiweizhi"></i>
@@ -43,10 +43,10 @@
    <text class="qc-title">技术支持 企成互动</text>
 </view>
 <!-- 注册弹窗 -->
-<view class="dialog" wx:if="{{dialog}}">
+<view class="dialog" wx:if="{{!dialog}}">
   <view class="reg-img" catchtap="stopCatch">
     <image src="/static/images/reg.png" mode="widthFix"></image>
-    <view class="close" bindtap="closeDialog">×</view>
-    <navigator class="btn" url="../../register/index">注册</navigator>
+    <view class="close" catchtap="closeDialog">×</view>
+    <navigator class="btn" open-type="redirect" url="../../register/index">注册</navigator>
   </view>
 </view>

@@ -213,6 +213,18 @@ export default {
           ]
         },
       ],
+      member: [
+        // 活动管理
+        {
+          name: "会员管理",
+          menuList: [
+            {
+              name: "会员列表",
+              url: "/main/member",
+            },
+          ]
+        },
+      ],
       menuList: [],
       wrapHeight: 0,
       sidebarHeight: 0
@@ -232,10 +244,10 @@ export default {
       ...this.guide,
       ...this.shop,
       ...this.activity,
+      ...this.member,
       // ...this.level,
       // ...this.channel,
       // ...this.distributer,
-      // ...this.member,
       // ...this.attachment,
     ]
   },

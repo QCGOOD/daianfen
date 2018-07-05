@@ -1,8 +1,5 @@
 {
   "pages": [
-    
-    "pages/register/index",
-    
     "pages/index/index",
     "pages/index/bespeakStore/bespeakStore",
     "pages/index/bespeakTime/bespeakTime",
@@ -11,6 +8,8 @@
     "pages/my/myReserve/myReserve",
     "pages/my/myCoupon/myCoupon",
     "pages/my/reserveDetail/reserveDetail",
+    "pages/register/index",
+    "pages/register/success/success",
     "pages/logs/logs"
     
   ],

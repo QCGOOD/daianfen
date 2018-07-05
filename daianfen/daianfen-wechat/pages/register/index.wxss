@@ -82,7 +82,7 @@ page{
   color: #fff;
 }
 .active::before{
-  content: "✔";
+  content: "";
   position: absolute;
   top: -14rpx;
   right: -1rpx;

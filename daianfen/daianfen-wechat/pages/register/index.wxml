@@ -2,11 +2,11 @@
   <view class="section">
     <view class="s-item">
       <text class="label">姓名 :</text>
-      <input type="text" data-key="uname" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
+      <input type="text" data-key="name" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
     </view>
     <view class="s-item">
       <text class="label">手机 :</text>
-      <input type="number" data-key="mobile" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机"/>
+      <input type="number" data-key="phoneNo" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机"/>
     </view>
     <view class="s-item">
       <input type="number" data-key="code" maxlength="6" bindinput="bindKeyInput" placeholder="请输入验证码"/>
@@ -30,5 +30,6 @@
   </view>
 </view>
 <view class="bottom-btn">
-  <button class="btn" bindtap="submit">注册</button>
+  <button class="btn" wx:if="{{canISubmit}}" bindtap="submit">注册</button>
+  <button class="btn" wx:else>注册</button>
 </view>

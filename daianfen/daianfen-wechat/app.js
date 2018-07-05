@@ -34,6 +34,13 @@ App({
       }
     })
   },
+  // 提示框
+  toast(text, icon) {
+    wx.showToast({
+      title: text,
+      icon: icon || 'none'
+    })
+  },
   globalData: {
     userInfo: null,
     layoutHeight:0,

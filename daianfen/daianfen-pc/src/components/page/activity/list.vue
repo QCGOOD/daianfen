@@ -80,7 +80,7 @@ export default {
       searchData: {},
       options: [
         {label: '预约', value: 1, disabled: false},
-        {label: '注册', value: 2, disabled: true}
+        {label: '注册', value: 2, disabled: false}
       ],
       optionSource: [
         {label: 'CRM优惠券', value: 1, disabled: false},

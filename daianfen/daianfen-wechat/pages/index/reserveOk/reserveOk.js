@@ -7,19 +7,18 @@ Page({
   data: {
     layoutHeight: app.globalData.layoutHeight,
     imgHead: app.globalData.imgHead,
-    // qrUrl: 'http://triumph-1255600302.file.myqcloud.com/attachments/image/143106066387782735.jpg',
-    // qrUrl: 'http://triumph-1255600302.file.myqcloud.com/attachments/image/006pF2YMzy7bQ58ePjV8f%26690.jpg',
     qrUrl: 'http://triumph-1255600302.file.myqcloud.com/attachments/image/138015363138737362.png',
     imgPath: '',
     openQR: false,
     dialog: true,
     reserveData: {},
-    reserveId: 'c0a8012062cdf7850162ce61b87f0035',
+    reserveId: '',
     couponNum: 0,
     latitude: 23.10647,
     longitude: 113.32446,
     address: '广州',
     shopName: '黛安芬',
+    userInfo: {}
   },
   
   onLoad: function (options) {
@@ -28,11 +27,10 @@ Page({
     })
     this.apiGetPoster();
     this.apiGetReserve(options.reserveId)
-    // this.apiGetReserve(this.data.reserveId)
-    // console.log('预约id====>',options.reserveId)
+    this.apiGetUserInfo()
   },
   closeDialog() {
-    this.setData({dialog: false})
+    this.setData({dialog: true})
   },
   // 打开二维码弹窗
   openQR() {
@@ -58,9 +56,23 @@ Page({
           imgPath: res.data.content0.content
         })
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
+        app.toast(res.data.errMsg)
+      }
+    })
+  },
+
+  // 获取用户信息-
+  apiGetUserInfo() {
+    http.get('/member/get', {}, true).then(res => {
+      // console.log('用户信息',res)
+      if (res.data.errCode == 401) {
+        app.login(() => {
+          this.apiGetUserInfo()
+        });
+      } else if (res.data.errCode == 0) {
+        this.setData({
+          userInfo: res.data.content0,
+          dialog: res.data.content0.isRegist
         })
       }
     })
@@ -83,6 +95,8 @@ Page({
           address: res.data.content0.reservation.address,
           shopName: res.data.content0.reservation.shopName
         })
+      }else{
+        app.toast(res.data.errMsg)
       }
     })
   },

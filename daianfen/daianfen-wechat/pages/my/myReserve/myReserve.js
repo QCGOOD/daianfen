@@ -60,15 +60,9 @@ Page({
         this.setData({
           reverseData: list
         })
-        wx.showToast({
-          title: '取消成功',
-          icon: 'none'
-        })
+        app.toast('取消成功')
       }else{
-        wx.showToast({
-          title: res.data.ereMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -96,10 +90,7 @@ Page({
         pageView(this, page, size, 'reverseData', reverseData, resData, total);
 
       }else{
-        wx.showTost({
-          title: res.data.message, 
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     }).finally(() => {
       setTimeout(() => {

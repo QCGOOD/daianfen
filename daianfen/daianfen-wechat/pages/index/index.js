@@ -48,10 +48,7 @@ Page({
           imgPath: res.data.content0.content
         })
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },

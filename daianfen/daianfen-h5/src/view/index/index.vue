@@ -31,9 +31,17 @@
       </div>
     </div>
     <div>
-      <scroller class="scroller" lock-x :height="`-${scrollerTop}px`">
-      <div id="">
-        <reserve-item class="reserve-item" :id="item.id" v-for="(item,i) in list" :key="i" :item="item"></reserve-item>
+      <scroller 
+        class="scroller" 
+        lock-x :height="`-${scrollerTop}px`" 
+        ref="scroller"
+        use-pulldown
+        :pulldown-config="pulldownConfig"
+        @on-pulldown-loading="pulldown"
+        @on-scroll-bottom="onScrollBottom">
+      <div>
+        <reserve-item v-if="list.length > 0" class="reserve-item" :id="item.id" v-for="(item,i) in list" :key="i" :item="item"></reserve-item>
+        <div v-if="!list.length > 0" style="color: #808080;text-align:center;padding-top:50%;">暂无记录</div>
       </div>
     </scroller>
     </div>
@@ -50,7 +58,11 @@ export default {
   data() {
     return {
       scrollerTop: 0,
+      onFetching: false,
+      hasMoreData: false,
       searchData: {
+        curPage: 1,
+        size: 20,
         keyWord: '',
         selectType: 2,
         status: 1,
@@ -62,6 +74,14 @@ export default {
         shop: {}
       },
       model: {},
+      pulldownConfig: {
+        downContent: '下拉刷新', 
+        upContent: '释放后更新'
+      },
+      pullupConfig: {
+        upContent:'上拉加载更多', 
+        downContent: '释放后加载'
+      }
     };
   },
   created() {
@@ -73,11 +93,11 @@ export default {
   },
   mounted() {
     this.getHeight()
-    this.setScrollTop()
-    window.onresize = () => {
-      this.getHeight()
-      this.setScrollTop()
-    };
+    // this.setScrollTop()
+    // window.onresize = () => {
+    //   this.getHeight()
+    //   this.setScrollTop()
+    // };
   },
   methods: {
     getHeight() {
@@ -97,24 +117,65 @@ export default {
       this.$nextTick(() => {
         let el = document.querySelector(".xs-container");
         let domHeight = window.innerHeight;
-        
         let targetEl = document.getElementById('c0a8011263cda27a0163cda300ea0002');
-        // let targetEl = this.$refs.c0a8011263cda27a0163cda300ea0002;
         console.log(targetEl)
         if(!targetEl) return false;
         let setScrollTop = targetEl.offsetTop;
         if(setScrollTop > (el.clientHeight - (domHeight - this.scrollerTop))){
           setScrollTop = el.clientHeight - (domHeight - this.scrollerTop)
         }
-        // console.log(setScrollTop, elHeight)
         el.style.transform = `translateY(-${setScrollTop}px)`
       })
     },
+    pulldown() {
+      console.log('下拉')
+      this.searchData.curPage = 1
+      this.search()
+    },
+    onScrollBottom() {
+      if (!this.hasMoreData) return;
+      if (this.onFetching ) {
+        // do nothing
+      } else {
+        this.onFetching = true
+        this.search()
+        console.log('上拉')
+      }
+    },
     apiGetList(data) {
+      this.$vux.loading.show()
       this.$http.get('/reservation/select', data)
       .then(res => {
-        this.list = res.data.content0.rows
-      })
+        let total = res.data.content0.total
+        let page = this.searchData.curPage
+        let size = this.searchData.size
+        let list = this.list
+        // 总页数
+        let totalPage = total % size == 0 ? total / size : Math.ceil(total / size) ;
+
+        if(page == 1) list = [];
+        
+        if(page >= totalPage){
+          this.list = list.concat(res.data.content0.rows)
+          // 没有更多数据 禁止上拉
+          this.hasMoreData = false
+          // this.$refs.scroller.disablePullup()
+        }else{
+          // 有更多数据
+          this.list = list.concat(res.data.content0.rows)
+          this.searchData.curPage += 1
+          this.hasMoreData = true
+        }
+        // 设置下拉状态完成
+        if(page == 1) this.$refs.scroller.donePulldown();
+        this.onFetching = false
+        // 重置 避免新加的数据看不到
+        this.$nextTick(() => {
+          this.$refs.scroller.reset()
+        })
+      }).finally(() => {
+        this.$vux.loading.hide()
+      });
     },
     apiGetNewCount() {
       this.$http.get('/reservation/newReservation')
@@ -151,6 +212,7 @@ export default {
     handler(i) {
       // 切换tab
       if(i+1 == this.searchData.status) return false;
+      this.searchData.curPage = 1
       this.searchData.status = i+1
       this.search()
     },

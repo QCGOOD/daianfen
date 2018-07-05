@@ -25,10 +25,10 @@
    </view>
    <view class="section">
       <text class="section-title">手机：</text>
-      <input class="section-value" type="number" disabled="{{!isNewUser}}" maxlength="11" data-type="phone" placeholder="请输入您的手机号" value="{{phone}}" bindinput="inputting"/>
+      <input class="section-value" type="number" disabled="{{isRegist}}" maxlength="11" data-type="phone" placeholder="请输入您的手机号" value="{{phone}}" bindinput="inputting"/>
       <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">13181983435</button> -->
    </view>
-   <view class="tips" wx:if="{{isNewUser}}" style="line-height:2.0;color:#808080;">温馨提示：手机号输入后自动绑定微信，不可再修改</view>
+   <view class="tips" wx:if="{{isNewUser}}" style="line-height:2.0;color:#808080;">温馨提示：手机号注册后自动绑定微信，不可再修改</view>
    <view class="btn-wrap">
       <view class="btn" bindtap="submitFormData">预约试穿</view>
    </view>

@@ -10,7 +10,6 @@ Page({
   },
 
   onLoad: function (options) {
-    // console.log('优惠券id========>',options.id)
     this.setData({
       reserveId: options.id
     })
@@ -20,8 +19,6 @@ Page({
   // 预约详情
   apiReserveDetail() {
     http.get('/reservation/get', {id: this.data.reserveId}, true).then(res => {
-      // wx.showLoading({title:'加载中…'})
-      // console.log(res.data)
       if (res.data.errCode == 401) {
         app.login(() => {
           this.apiReserveDetail()
@@ -31,10 +28,7 @@ Page({
           reserveData: res.data.content0.reservation
         })
       }else{
-        wx.showToast({
-          title: res.data.ereMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -72,27 +66,19 @@ Page({
   // 确认到店
   apiConfirmShop(id) {
     http.post('/reservation/updateState', {reservationId: id}, true).then(res => {
-      // wx.showLoading({title:'加载中…'})
-      // console.log(res.data)
       if (res.data.errCode == 401) {
         app.login(() => {
           this.apiConfirmShop(id)
         });
       } else if(res.data.errCode == 0){
-        wx.showToast({
-          title: '确认成功',
-          icon: 'none'
-        })
+        app.toast('确认成功')
         setTimeout(() => {
           wx.redirectTo({
             url: '../myReserve/myReserve'
           })
         }, 500);
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -100,27 +86,19 @@ Page({
   // 取消预约
   apiCancelReserve(id) {
     http.post('/reservation/cancel', {id: id}, true).then(res => {
-      // wx.showLoading({title:'加载中…'})
-      // console.log(res.data)
       if (res.data.errCode == 401) {
         app.login(() => {
           this.apiCancelReserve(id)
         });
       } else if(res.data.errCode == 0){
-        wx.showToast({
-          title: '取消成功',
-          icon: 'none'
-        })
+        app.toast('取消成功')
         setTimeout(() => {
           wx.redirectTo({
             url: '../myReserve/myReserve'
           })
         }, 500);
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },

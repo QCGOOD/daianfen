@@ -24,6 +24,8 @@ Page({
     reserveId: '',
     // tru为新用户
     isNewUser: true,
+    // 是否注册
+    isRegist: false,
     // 是否打开选择框
     showDate: false,
     showTime: false,
@@ -78,10 +80,7 @@ Page({
           imgPath: res.data.content0.content
         })
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -95,8 +94,16 @@ Page({
           this.apiGetUserInfo()
         });
       } else if (res.data.errCode == 0) {
-        if(!res.data.content0 || res.data.content0 == '') this.setData({isNewUser: true});
-        else this.setData({isNewUser: false, uname: res.data.content0.name, phone: res.data.content0.phoneNo});
+        if(!res.data.content0 || res.data.content0 == '') {
+          this.setData({isNewUser: true});
+        }else {
+          this.setData({
+            isNewUser: false, 
+            isRegist: res.data.content0.isRegist,
+            uname: res.data.content0.name, 
+            phone: res.data.content0.phoneNo
+          });
+        }
       }
     })
   },
@@ -112,23 +119,11 @@ Page({
     let phone = this.data.phone;
 
     if(date == '' || time == '' || date == '获取日期失败' || time == '获取时间失败'|| uname == '' || !phone || phone == ''){
-      wx.showToast({
-        title: '请完善信息',
-        icon: 'none',
-        duration: 1000
-      })
+      app.toast('请完善信息')
     }else if( !this.isPoneAvailable(phone) ){
-      wx.showToast({
-        title: '手机号有误',
-        icon: 'none',
-        duration: 1000
-      })
+      app.toast('手机号有误')
     }else if(!shopId || shopId == ''){
-      wx.showToast({
-        title: '店铺异常请重新选择',
-        icon: 'none',
-        duration: 1000
-      })
+      app.toast('店铺异常请重新选择')
     }else{
       if(this.data.isNewUser) {
         // 新用户
@@ -158,10 +153,7 @@ Page({
       } else if (res.data.errCode == 0) {
         this.apiPostReserve();
       }else{
-        wx.showToast({
-          title: '预约失败',
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -193,10 +185,7 @@ Page({
           url: '../reserveOk/reserveOk?reserveId='+res.data.content0.reservationId
         })
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     }).finally(() => {
       this.setData({canISubmit: true})
@@ -230,7 +219,6 @@ Page({
 
   // 获取用户基本信息
   getUserInfo() {
-    console.log('基本信息')
     wx.getUserInfo({
       success: res => {
         // 可以将 res 发送给后台解码出 unionId
@@ -242,10 +230,7 @@ Page({
   },
   
   getPhoneNumber: function(e) { 
-    // console.log(e)
-    // console.log(e.detail.errMsg) 
-    // console.log(e.detail.iv) 
-    // console.log(e.detail.encryptedData) 
+
   },
 
   apiGetPhone() {

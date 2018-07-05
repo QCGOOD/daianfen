@@ -142,11 +142,7 @@ Page({
   nextStep() {
     let shopId = this.data.shopId;
     if(!shopId || shopId == ''){
-      wx.showToast({
-        title: '专柜有误',
-        icon: 'none',
-        duration: 1000
-      })
+      app.toast('专柜有误')
     }else{
       wx.navigateTo({
         url: '../bespeakTime/bespeakTime?id='+shopId,
@@ -167,10 +163,7 @@ Page({
           imgPath: res.data.content0.content
         })
       }else{
-        wx.showToast({
-          title: res.data.errMsg,
-          icon: 'none'
-        })
+        app.toast(res.data.errMsg)
       }
     })
   },
@@ -192,7 +185,7 @@ Page({
   // 获取店铺列表
   apiGetStoreList(city, lat, lng) {
     if(city == '' || lat == '' || lng == '' || city == '获取定位失败') {
-      wx.showToast({title: '请授权我们获取您的位置', icon: 'none'})
+      app.toast('请授权我们获取您的位置')
       wx.openSetting({
         success: (res) => {
           if(res.authSetting['scope.userLocation']){

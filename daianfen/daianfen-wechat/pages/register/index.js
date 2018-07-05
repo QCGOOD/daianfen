@@ -1,16 +1,19 @@
 import http from '../../utils/http.js'
+const app = getApp()
 var timer = null
 Page({
 
   data: {
     isSendCode: false,
-    second: 6,
+    canISubmit: true,
+    second: 59,
     barActive: 0,
     pantyActive: 1,
     showMore: false,
+    info: {},
     model: {
-      uname: '',
-      mobile: '',
+      name: '',
+      phoneNo: '',
       code: '',
       barSize: '70A',
       pantySize: 'M'
@@ -32,6 +35,73 @@ Page({
   onHide() {
     clearInterval(timer)
   },
+  // 提交
+  submit() {
+    if (this.data.model.name == '') {
+      app.toast('请输入姓名')
+    }else if(this.data.model.phoneNo == '') {
+      app.toast('请输入手机')
+    }else if(this.data.model.code == '') {
+      app.toast('请输入验证码')
+    }else if(this.data.model.barSize == '') {
+      app.toast('请选择文胸尺寸')
+    }else if(this.data.model.pantySize == '') {
+      app.toast('请选择内裤尺寸')
+    }else{
+      this.apiRegist(this.data.model)
+    }
+  },
+  // 获取验证码
+  apiSendCode(model) {
+    http.post('/sendCode', model, true).then(res => {
+      // console.log('验证码',res.data)
+      if (res.data.errCode == 401) {
+        app.login(() => {
+          this.apiSendCode(model)
+        });
+      } else if (res.data.errCode == 0) {
+        // do something
+        this.countDown()
+      }else{
+        app.toast(res.data.errMsg)
+      }
+    })
+  },
+  // 注册
+  apiRegist(model) {
+    wx.showLoading()
+    this.setData({canISubmit: false})
+    http.post('/member/regist', model, true).then(res => {
+      // console.log('注册',res.data)
+      if (res.data.errCode == 401) {
+        app.login(() => {
+          this.apiRegist(model)
+        });
+      } else if (res.data.errCode == 0) {
+        // do something
+        setTimeout(() => {
+          wx.redirectTo({
+            url: 'success/success?couponNum='+res.data.content0
+          })
+        }, 500);
+      }else{
+        app.toast(res.data.errMsg)
+      }
+    }).finally(() => {
+      this.setData({canISubmit: true})
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 500)
+    });
+  },
+  // 发送验证码
+  sendCode() {
+    if (this.data.model.phoneNo == '') {
+      app.toast('手机号不能为空')
+      return false;
+    }
+    this.apiSendCode({mobile: this.data.model.phoneNo})
+  },
   // 正在输入
   bindKeyInput(e) {
     let type = e.currentTarget.dataset.key;
@@ -41,21 +111,7 @@ Page({
       [key]: value
     })
   },
-  // 提交
-  submit() {
-    console.log(this.data.model)
-  },
-  // 发送验证码
-  sendCode() {
-    if (this.data.model.mobile == '') {
-      wx.showToast({
-        title: '手机号不能为空',
-        icon: 'none'
-      })
-      return false;
-    }
-    this.countDown()
-  },
+  // 展开更多
   showMore() {
     this.setData({
       showMore: !this.data.showMore
@@ -92,7 +148,7 @@ Page({
       clearInterval(timer)
       this.setData({
         isSendCode: false,
-        second: 6
+        second: 59
       })
       return;
     }
