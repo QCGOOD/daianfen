@@ -15,7 +15,7 @@
           <el-input v-model.trim="model.title"></el-input>
         </el-form-item>
         <el-form-item label="说明" prop="content">
-          <el-input v-model.trim="model.content"></el-input>
+          <el-input v-model.trim="model.content" placeholder="每条数字开头，中文分号结尾。如：1.内容；2.内容；"></el-input>
         </el-form-item>
         <!-- <el-form-item label="类型" prop="couponsType">
           <el-select v-model="model.ruleType" placeholder="优惠券类型,ABM1中的细类。例如生日券，积分券，回馈券，体验券等">

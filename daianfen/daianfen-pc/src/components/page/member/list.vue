@@ -24,9 +24,9 @@
           </el-form-item>
         </el-form>
       </search-wrap>
-      <button-wrap v-if="base.transferMember">
+      <!-- <button-wrap>
         <el-button type="primary" size="mini" :disabled="tableList.id == null" @click="update()">修改</el-button>
-      </button-wrap>
+      </button-wrap> -->
     </div>
     <qc-table ref="table" :table-list="showData" :search="searchData" url="/member/page"></qc-table>
     <dig-form :visible='digFormWrap' :id="updateId" @close="digClose"></dig-form>

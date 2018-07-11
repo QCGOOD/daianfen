@@ -99,8 +99,9 @@ export default {
     overflow: hidden;
     .logo{
       width:400px;
-      height:250px;
+      // height:250px;
       margin:2% auto 0;
+      overflow: hidden;
       img{
         width:auto;
         max-width:100%;
@@ -110,6 +111,34 @@ export default {
       font-size: 26px;
       color: #b80223;
       margin-top: 20px;
+    }
+    @media screen and (max-height: 900px) { /*当屏幕尺寸小于900px时，应用下面的CSS样式*/
+      .logo {
+        width: 300px;
+      }
+      .title{
+        font-size: 22px;
+        font-weight: 550;
+        margin-top: 10px;
+      }
+    }
+    @media screen and (max-height: 680px) { /*当屏幕尺寸小于680px时，应用下面的CSS样式*/
+      .logo {
+        width: 250px;
+      }
+      .title{
+        margin-top: 10px;
+      }
+    }
+    @media screen and (max-height: 600px) { /*当屏幕尺寸小于680px时，应用下面的CSS样式*/
+      .logo {
+        width: 200px;
+        margin: 0 auto;
+      }
+      .title{
+        font-size: 18px;
+        margin-top: 10px;
+      }
     }
   }
   .content{

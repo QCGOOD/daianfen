@@ -12,8 +12,8 @@ module.exports = {
     proxyTable: {
       '/api': {
         // target: 'http://192.168.1.32:8180/athena-app/',
-        // target: 'http://192.168.1.32:8180',
-        target: 'https://triumph.wego168.com/triumph/admin',
+        target: 'http://192.168.1.32:8180',
+        // target: 'https://triumph.wego168.com/triumph/admin',
         // target: 'http://192.168.1.18:80/triumph/admin',
         changeOrigin: true,
         pathRewrite: {
