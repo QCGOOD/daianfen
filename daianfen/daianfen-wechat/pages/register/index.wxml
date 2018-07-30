@@ -1,10 +1,6 @@
 <view class="content">
   <view class="section">
     <view class="s-item">
-      <text class="label">姓名 :</text>
-      <input type="text" data-key="name" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
-    </view>
-    <view class="s-item">
       <text class="label">手机 :</text>
       <input type="number" data-key="phoneNo" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机"/>
     </view>
@@ -14,7 +10,25 @@
       <text wx:else class="send-code" style="color: #808080;">重新获取{{second}}s</text>
     </view>
   </view>
-  <view class="section bar">
+  <view class="section">
+    <view class="s-item">
+      <text class="label">姓名 :</text>
+      <input type="text" data-key="name" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
+    </view>
+    <view class="s-item">
+      <text class="label">生日 :</text>
+      <picker class="picker" mode="date" value="{{date}}" start="1970-12-31" end="" bindchange="bindDateChange">
+        <view class="picker">
+          {{model.birthday?model.birthday:'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="s-item">
+      <text class="label">性别 :</text>
+      女<switch checked="{{model.sex == 1}}" color="#b80223" style="padding: 0 20rpx;" bindchange="switchChange"/>男
+    </view>
+  </view>
+  <!-- <view class="section bar">
     <view class="title">文胸尺寸</view>
     <view class="size-list">
       <text wx:if="{{showMore || index < 14}}" class="size-item {{index == barActive?'active':''}}" wx:for="{{barList}}" wx:key="index" data-size="{{item}}" data-i="{{index}}" bindtap="pickBar">{{item}}</text>
@@ -27,9 +41,13 @@
     <view class="size-list">
       <text class="size-item {{index == pantyActive?'active':''}}" wx:for="{{pantyList}}" wx:key="index" data-size="{{item}}"  data-i="{{index}}" bindtap="pickPanty">{{item}}</text>
     </view>
-  </view>
+  </view> -->
 </view>
 <view class="bottom-btn">
   <button class="btn" wx:if="{{canISubmit}}" bindtap="submit">注册</button>
   <button class="btn" wx:else>注册</button>
 </view>
+<view class="copyright" style="position:absolute;bottom:0;left: 0;">
+  <image src="/static/images/qc-logo.png" class="qc-logo" mode="widthFix"></image>
+  <text class="qc-title">技术支持 企成互动</text>
+ </view>

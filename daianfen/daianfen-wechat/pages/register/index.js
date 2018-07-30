@@ -15,8 +15,10 @@ Page({
       name: '',
       phoneNo: '',
       code: '',
-      barSize: '70A',
-      pantySize: 'M'
+      sex: 2,
+      birthday: '',
+      barSize: '',
+      pantySize: ''
     },
     barList: [
       '70A', '70B', '70C', '70D', '70E',
@@ -111,6 +113,30 @@ Page({
       [key]: value
     })
   },
+  // 选择生日
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    let birthday = 'model.birthday';
+    this.setData({
+      [birthday]: e.detail.value
+    })
+  },
+  // 性别
+  switchChange: function (e){
+    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
+    let sex = 'model.sex';
+    
+    if (e.detail.value) {
+      this.setData({
+        [sex]: 1
+      })
+    } else {
+      this.setData({
+        [sex]: 2
+      })
+    }
+  },
+
   // 展开更多
   showMore() {
     this.setData({
