@@ -45,10 +45,12 @@ Page({
       app.toast('请输入手机')
     }else if(this.data.model.code == '') {
       app.toast('请输入验证码')
-    }else if(this.data.model.barSize == '') {
-      app.toast('请选择文胸尺寸')
-    }else if(this.data.model.pantySize == '') {
-      app.toast('请选择内裤尺寸')
+    }else if(this.data.model.birthday == '') {
+      app.toast('请选择生日')
+    // }else if(this.data.model.pantySize == '') {
+    //   app.toast('请选择文胸尺寸')
+    // }else if(this.data.model.pantySize == '') {
+    //   app.toast('请选择内裤尺寸')
     }else{
       this.apiRegist(this.data.model)
     }
