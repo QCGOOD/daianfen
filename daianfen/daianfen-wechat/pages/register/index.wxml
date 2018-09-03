@@ -2,7 +2,8 @@
   <view class="section">
     <view class="s-item">
       <text class="label">手机 :</text>
-      <input type="number" data-key="phoneNo" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机"/>
+      <input type="number" data-key="phoneNo" style="margin-right: 60rpx;" bindinput="bindKeyInput" focus maxlength="11"  value="{{model.phoneNo}}" placeholder="请输入手机"/>
+      <view class="icon icon-webicon309 clear" catchtap="clear"></view>
     </view>
     <view class="s-item">
       <input type="number" data-key="code" maxlength="6" bindinput="bindKeyInput" placeholder="请输入验证码"/>
@@ -13,7 +14,7 @@
   <view class="section">
     <view class="s-item">
       <text class="label">姓名 :</text>
-      <input type="text" data-key="name" bindinput="bindKeyInput" focus placeholder="请输入姓名"/>
+      <input type="text" data-key="name" bindinput="bindKeyInput" value="{{model.name}}" placeholder="请输入姓名"/>
     </view>
     <view class="s-item">
       <text class="label">生日 :</text>

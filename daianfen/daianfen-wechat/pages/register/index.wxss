@@ -13,6 +13,7 @@ page{
   padding-top: 30rpx;
 }
 .section .s-item{
+  position: relative;
   display: flex;
   /* justify-content: space-around; */
   align-items: center;
@@ -22,6 +23,14 @@ page{
   border-radius: 5px;
   margin: 0 0rpx 30rpx;
   
+}
+.section .s-item .clear{
+  position: absolute;
+  top: 50%;
+  right: 20rpx;
+  transform: translate(0, -50%);
+  font-size: 40rpx;
+  color: #b80223;
 }
 .section .s-item .label{
   padding-right: 20rpx;

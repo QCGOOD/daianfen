@@ -11,6 +11,7 @@ Page({
     pantyActive: 1,
     showMore: false,
     info: {},
+    user: {},
     model: {
       name: '',
       phoneNo: '',
@@ -32,10 +33,35 @@ Page({
   },
 
   onLoad(options) {
-  
+    this.apiGetUserInfo()
   },
   onHide() {
     clearInterval(timer)
+  },
+  clear() {
+    console.log(111)
+    let phoneNo = 'model.phoneNo';
+    this.setData({
+      [phoneNo]: '',
+    })
+  },
+  apiGetUserInfo() {
+    http.get('/member/get', {}, true).then(res => {
+      // console.log('用户信息',res)
+      if (res.data.errCode == 401) {
+        app.login(() => {
+          this.apiGetUserInfo()
+        });
+      } else if (res.data.errCode == 0) {
+        let name = 'model.name';
+        let phoneNo = 'model.phoneNo';
+        this.setData({
+          [name]: res.data.content0.name || '',
+          [phoneNo]: res.data.content0.phoneNo || '',
+          user: res.data.content0
+        })
+      }
+    })
   },
   // 提交
   submit() {
@@ -171,6 +197,7 @@ Page({
     this.setData({isSendCode: true})
     timer = setInterval(() => {
       second --
+      console.log(second)
       this.setData({second: second})
       if(second < 1){
       clearInterval(timer)
