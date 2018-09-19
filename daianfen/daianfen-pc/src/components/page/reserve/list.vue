@@ -23,6 +23,7 @@
             <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.endDate" type="date" placeholder="结束时间"></el-date-picker>
           </el-form-item>
           <el-form-item>
+            <el-button type="info" size="small" @click="apiExport()">导出</el-button>
             <el-button type="primary" size="small" @click="search()">查询</el-button>
           </el-form-item>
         </el-form>
@@ -68,6 +69,7 @@ export default {
         { prop: "member_name", label: "姓名" },
         { prop: "phone_no", label: "手机" },
         { prop: "shop_name", label: "专柜" },
+        { prop: "state", label: "状态", template: 'reserveState' },
         { prop: "reservation_date", label: "预约日期" },
         { prop: "reservation_time", label: "预约时间" },
         { prop: "id", label: "操作", template: 'mark'}
@@ -115,7 +117,11 @@ export default {
     addAccount() {
       this.updateId = this.tableList.id;
       this.accountFormWrap = true;
-    }
+    },
+    // 导出
+    apiExport() {
+      location.href = `${this.localhost}/reservation/export?${this.qs.stringify(this.searchData)}`
+    },
   }
 };
 </script>

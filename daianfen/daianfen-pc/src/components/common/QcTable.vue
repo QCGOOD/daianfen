@@ -105,7 +105,10 @@
           </span>
         </div>
       </el-table-column>
-
+      <!-- 预约状态  -->
+      <el-table-column :align="item.align || 'center'" v-else-if="item.template == 'reserveState'" :label="item.label" :width="item.width">
+        <template slot-scope="scope">{{scope.row[item.prop] | reserveState}}</template>
+      </el-table-column>
       <el-table-column :align="item.align || 'center'" v-else-if="item.template =='audit'" :label="item.label" :width="item.width" >
         <template slot-scope="scope">{{scope.row[item.prop] | audit }}</template>
       </el-table-column>
@@ -308,6 +311,18 @@ export default {
           return "进行中";
         case 3:
           return "交易成功";
+      }
+    },
+    //预约状态
+    reserveState(val) {
+      if (val === "") return "";
+      switch (val) {
+        case 1:
+          return "已预约";
+        case 2:
+          return "已到店";
+        case 3:
+          return "已取消";
       }
     },
     //优惠券领取状态
