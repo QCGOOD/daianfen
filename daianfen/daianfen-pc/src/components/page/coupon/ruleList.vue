@@ -166,8 +166,9 @@ export default {
         if (valid) {
           delete this.model.createTime
           delete this.model.updateTime
-        delete this.model.isDeleted
-        delete this.model.madeCount
+          delete this.model.isDeleted
+          delete this.model.madeCount
+          this.model.title  =  this.model.title.replace(/\s+/g,""); 
           this.apiAddData(this.model);
         } else {
           this.loading = false;

@@ -216,7 +216,8 @@ export default {
       let regTitle = /.*\s/; // 匹配标题
       let regDetail = /\s[0-9].*/g; // 匹配详情
       if(type === 1) {
-        return val.match(regTitle)[0];
+      //   return val.match(regTitle)[0];
+        return val.substr(0, val.indexOf(" "));
       }else if(type === 2){
         val = val.replace(/；/g,'；\n');
         val = val.match(regDetail).join('');

@@ -23,7 +23,7 @@ module.exports = {
       '/triumph/admin': {
         // target: 'http://192.168.1.70:8080/',
         // target: 'http://192.168.1.18:80/',
-        target: 'http://192.168.1.32:8080/',
+        target: 'http://192.168.1.32:8180/',
         // target: 'https://triumph.wego168.com/',
         changeOrigin: true,
         pathRewrite: {

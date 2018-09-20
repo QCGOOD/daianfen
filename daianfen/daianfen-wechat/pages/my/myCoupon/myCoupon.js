@@ -74,7 +74,8 @@ Page({
           validCount: res.data.content0.validCount
         })
         resData.map((item) => {
-          item.title = item.content.match(regTitle);
+         //  item.title = item.content.match(regTitle);
+          item.title = item.content.substr(0, item.content.indexOf(" "));
           item.content = item.content = item.content.replace(/；/g,'；\n');
           try {
             item.detail = item.content.match(regDetail).join('');

@@ -12,7 +12,7 @@
     <el-dialog :title="updateId?'修改':'新建'" :visible.sync="dialogFormVisible" append-to-body @close="digClose()">
       <el-form :model="model" ref="model" :rules="rules" label-width="120px" style="width:500px;margin:0 auto;">
         <el-form-item label="标题" prop="title">
-          <el-input v-model="model.title"></el-input>
+          <el-input v-model.trim="model.title"></el-input>
         </el-form-item>
         <el-form-item label="类型" prop="ruleType">
           <el-select v-model="model.ruleType" placeholder="请选择">
@@ -144,7 +144,7 @@ export default {
     // 提交
     submit() {
       this.$refs.model.validate(valid => {
-        if (valid) {
+        if (valid) {  
           this.apiAddData(this.model);
         } else {
           this.loading = false;

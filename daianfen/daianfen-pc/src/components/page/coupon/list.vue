@@ -31,6 +31,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="small" @click="search()">查询</el-button>
+            <el-button type="info" size="small" @click="apiExport()">导出</el-button>
           </el-form-item>
         </el-form>
       </search-wrap>
@@ -59,8 +60,6 @@ export default {
         {value: 2,label: '系统优惠券'},
       ],
       searchData: {
-        // curPage: '1',
-        // size: '20',
         // startDate: '2018-04-21',
         // endDate: '2018-05-21',
         couponsBreed: '',
@@ -84,7 +83,10 @@ export default {
     };
   },
   methods: {
-   
+   // 导出
+    apiExport() {
+      location.href = `${this.localhost}/coupons/export?${this.qs.stringify(this.searchData)}`
+    },
   }
 };
 </script>

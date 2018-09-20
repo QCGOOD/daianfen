@@ -23,8 +23,8 @@
             <el-date-picker size="small" value-format="yyyy-MM-dd" v-model="searchData.endDate" type="date" placeholder="结束时间"></el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="info" size="small" @click="apiExport()">导出</el-button>
             <el-button type="primary" size="small" @click="search()">查询</el-button>
+            <el-button type="info" size="small" @click="apiExport()">导出</el-button>
           </el-form-item>
         </el-form>
       </search-wrap>
