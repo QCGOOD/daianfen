@@ -23,7 +23,7 @@
       </button-wrap>
     </div>
     <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" url="/shop/list"></qc-table>
-  
+
     <el-dialog :title="updateId?'修改':'新建'" :visible.sync="dialogFormVisible" append-to-body @close="digClose()">
       <el-form :model="model" ref="model" :rules="rules" label-width="100px" style="width:500px;margin:0 auto;">
         <el-form-item label="编号" prop="shopNo">
@@ -57,7 +57,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="digClose()">取 消</el-button>
-        <el-button type="primary" @click="submit()">确 定</el-button>
+        <el-button type="primary" @click="submit()">提 交</el-button>
       </div>
     </el-dialog>
   </div>
@@ -78,72 +78,71 @@ export default {
       isImport: false,
       dialogFormVisible: false,
       options: [
-        {value: 0,label: '全部'},
-        {value: 1,label: '已预约'},
-        {value: 2,label: '已到店'},
-        {value: 3,label: '已取消'},
+        { value: 0, label: "全部" },
+        { value: 1, label: "已预约" },
+        { value: 2, label: "已到店" },
+        { value: 3, label: "已取消" }
       ],
       model: {},
       searchData: {
-        shopName: '',
-        city: '',
+        shopName: "",
+        city: ""
       },
       showData: [
-        { prop: "shopNo", label: "编号", width:150, align: 'center'},
-        { prop: "shopName", label: "专柜", width:200, align: 'left'},
-        { prop: "shopType", label: "渠道", width:100, align: 'left'},
-        { prop: "province", label: "省份", width:100, align: 'left'},
-        { prop: "city", label: "城市", width:100, align: 'left'},
-        { prop: "area", label: "区县", width:120, align: 'left'},
-        { prop: "address", label: "地址", align: 'left'},
-        { prop: "id", label: "操作", title: '查看预约', url:'/mian/guide', template: 'jump'},
+        { prop: "shopNo", label: "编号", width: 150, align: "center" },
+        { prop: "shopName", label: "专柜", width: 200, align: "left" },
+        { prop: "shopType", label: "渠道", width: 100, align: "left" },
+        { prop: "province", label: "省份", width: 100, align: "left" },
+        { prop: "city", label: "城市", width: 100, align: "left" },
+        { prop: "area", label: "区县", width: 120, align: "left" },
+        { prop: "address", label: "地址", align: "left" },
+        {
+          prop: "id",
+          label: "操作",
+          title: "查看预约",
+          url: "/mian/guide",
+          template: "jump"
+        }
       ],
       rules: {
-        shopNo: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
-        ],
+        shopNo: [{ required: true, message: "字段不能为空", trigger: "blur" }],
         shopName: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
+          { required: true, message: "字段不能为空", trigger: "blur" }
         ],
         shopType: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
+          { required: true, message: "字段不能为空", trigger: "blur" }
         ],
         province: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
+          { required: true, message: "字段不能为空", trigger: "blur" }
         ],
-        city: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
-        ],
-        area: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
-        ],
-        address: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
-        ],
-        city: [
-          { required: true, message: '字段不能为空', trigger: 'blur' }
-        ],
+        city: [{ required: true, message: "字段不能为空", trigger: "blur" }],
+        area: [{ required: true, message: "字段不能为空", trigger: "blur" }],
+        address: [{ required: true, message: "字段不能为空", trigger: "blur" }],
+        city: [{ required: true, message: "字段不能为空", trigger: "blur" }]
       }
     };
   },
   methods: {
     apiAddData(data) {
-      this.$http.post('/shop/add', data)
-      .then(res => {
-        this.$message.success('提交成功')
-        this.searchKeep()
-        this.digClose()
-      })
+      this.$http.post("/shop/add", data).then(res => {
+        this.$message.success("提交成功");
+        this.searchKeep();
+        this.digClose();
+      });
     },
-    search(){
+    search() {
       this.searchKeep();
     },
     deleteConfirm() {
-      this.$confirm(`此操作将删除 ${ this.tableList.shopName } 是否继续？`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      this.$confirm(
+        `此操作将删除 ${this.tableList.shopName} 是否继续？`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      )
         .then(() => {
           this.delete();
         })
@@ -152,10 +151,12 @@ export default {
         });
     },
     delete() {
-      this.$http.post('/shop/delete', { employeeId: this.tableList.id }).then(res => {
-        this.searchKeep();
-        this.$message.success('删除成功')
-      });
+      this.$http
+        .post("/shop/delete", { employeeId: this.tableList.id })
+        .then(res => {
+          this.searchKeep();
+          this.$message.success("删除成功");
+        });
     },
     insert() {
       this.dialogFormVisible = true;
@@ -163,12 +164,12 @@ export default {
     update() {
       this.updateId = this.tableList.id;
       this.dialogFormVisible = true;
-      this.model = JSON.parse(JSON.stringify(this.tableList))
+      this.model = JSON.parse(JSON.stringify(this.tableList));
     },
     digClose(flag) {
       this.updateId = "";
       this.dialogFormVisible = false;
-      this.model = {}
+      this.model = {};
     },
     // 导入
     apiImport() {
@@ -176,21 +177,22 @@ export default {
     },
     // 导出
     apiExport() {
-      location.href = `${this.localhost}/shop/exportData?${this.qs.stringify(this.searchData)}`
+      location.href = `${this.localhost}/shop/exportData?${this.qs.stringify(
+        this.searchData
+      )}`;
     },
     // 提交
     submit() {
       this.$refs.model.validate(valid => {
         if (valid) {
-        if(this.model.createTime) delete this.model.createTime
-        if(this.model.updateTime) delete this.model.updateTime
+          delete this.model.createTime;
+          delete this.model.updateTime;
           this.apiAddData(this.model);
         } else {
           this.loading = false;
         }
       });
-    },
-    
+    }
   }
 };
 </script>

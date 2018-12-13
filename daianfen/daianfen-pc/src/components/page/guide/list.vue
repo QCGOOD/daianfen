@@ -185,8 +185,8 @@ export default {
           //   shopCode: this.model.shopCode,
           //   phoneNo: this.model.phoneNo,
           // }
-          if(this.model.createTime) delete this.model.createTime
-          if(this.model.updateTime) delete this.model.updateTime
+          delete this.model.createTime
+          delete this.model.updateTime
           this.apiAddData(this.model);
         } else {
           this.loading = false;
