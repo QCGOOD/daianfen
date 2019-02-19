@@ -152,7 +152,7 @@ export default {
     },
     delete() {
       this.$http
-        .post("/shop/delete", { employeeId: this.tableList.id })
+        .post("/shop/delete", { id: this.tableList.id })
         .then(res => {
           this.searchKeep();
           this.$message.success("删除成功");

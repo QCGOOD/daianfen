@@ -61,10 +61,10 @@ export default {
     };
   },
   mounted() {
-    this.action =
-      process.env.NODE_ENV === "production"
-        ? `${this.base.baseHost}${this.base.projectName()}/attachments/images/tencent_cloud`
-        : `${this.base.projectName()}/attachments/images/tencent_cloud`;
+    this.action = `${this.base.projectName()}/attachments/images/tencent_cloud`;
+      // process.env.NODE_ENV === "production"
+        // ? `${this.base.baseHost}${this.base.projectName()}/attachments/images/tencent_cloud`
+        // : `${this.base.projectName()}/attachments/images/tencent_cloud`;
   },
   methods: {
     clearFiles() {
