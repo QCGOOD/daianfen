@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import Vue from "../main.js";
-import { Message } from 'element-ui';
+import { Message, MessageBox } from 'element-ui';
 import base from '../assets/js/base'
 
 axios.defaults.timeout = 60000; //响应时间
@@ -24,7 +24,7 @@ axios.interceptors.response.use((success) => {
   } else {
     if(success.data.errCode == 401){
       // Vue.$router.replace('/')
-      Message.confirm(success.data.errMsg, '提示', {
+      MessageBox.confirm(success.data.errMsg, '提示', {
         confirmButtonText: '重新登录',
         cancelButtonText: '取消',
         type: 'warning',
