@@ -24,7 +24,7 @@ axios.interceptors.response.use((success) => {
   } else {
     if(success.data.errCode == 401){
       // Vue.$router.replace('/')
-      MessageBox.confirm(success.data.errMsg, '提示', {
+      Message.confirm(success.data.errMsg, '提示', {
         confirmButtonText: '重新登录',
         cancelButtonText: '取消',
         type: 'warning',
