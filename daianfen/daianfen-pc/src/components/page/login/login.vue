@@ -146,6 +146,9 @@ export default {
     height: 60%;
     background-color:#b80223;
     overflow: hidden;
+    /deep/.el-form-item .el-input__inner{
+      border-color: #dcdfe6 !important;
+    }
     .form-right {
       width: 450px;
       box-sizing: border-box;

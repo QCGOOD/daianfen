@@ -37,10 +37,7 @@ export default {
     };
   },
   mounted() {
-    this.action =
-      process.env.NODE_ENV === "production"
-        ? `${this.base.baseHost}${this.base.projectName()}/${this.url}`
-        : `${this.base.projectName()}/${this.url}`;
+    this.action = `${this.base.projectName()}${this.url}`;
   },
   methods: {
     clearFiles() {
