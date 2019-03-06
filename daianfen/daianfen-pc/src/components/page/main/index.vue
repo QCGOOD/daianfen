@@ -157,26 +157,6 @@ export default {
           ]
         },
       ],
-      coupon: [
-        // 优惠券管理
-        {
-          name: "优惠券管理",
-          menuList: [
-            // {
-            //   name: "优惠券列表",
-            //   url: "/main/coupon/couponList",
-            // },
-            {
-              name: "领取列表",
-              url: "/main/coupon",
-            },
-            {
-              name: "制券规则",
-              url: "/main/coupon/ruleList",
-            },
-          ]
-        },
-      ],
       guide: [
         // 导购管理
         {
@@ -197,6 +177,26 @@ export default {
             {
               name: "专柜列表",
               url: "/main/shop",
+            },
+          ]
+        },
+      ],
+      coupon: [
+        // 优惠券管理
+        {
+          name: "优惠券管理",
+          menuList: [
+            // {
+            //   name: "优惠券列表",
+            //   url: "/main/coupon/couponList",
+            // },
+            {
+              name: "领取列表",
+              url: "/main/coupon",
+            },
+            {
+              name: "制券规则",
+              url: "/main/coupon/ruleList",
             },
           ]
         },

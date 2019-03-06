@@ -1,21 +1,20 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import product from './product';
-import activity2 from './activity2';
+// import product from './product';
 import activity from './activity';
-import lesson from './lesson';
-import level from './level';
+// import lesson from './lesson';
+// import level from './level';
 import reserve from './reserve';
 import statistical from './statistical';
-import power from './power';
+// import power from './power';
 import coupon from './coupon';
 import reserveSetting from './reserveSetting';
 import guide from './guide';
 import shop from './shop';
 import category from './category';
-import channel from './channel';
+// import channel from './channel';
 import attachment from './attachment';
-import distributer from './distributer';
+// import distributer from './distributer';
 import member from './member';
 import setting from './setting';
 
@@ -44,7 +43,7 @@ export default new Router({
         ...statistical,
         
         // 权限管理
-        ...power,
+        // ...power,
 
         //  系统设置
         ...setting,
@@ -53,7 +52,7 @@ export default new Router({
         ...member,
         
         // 业务员
-        ...distributer,
+        // ...distributer,
         
         // 图片
         ...attachment,
@@ -62,19 +61,16 @@ export default new Router({
         ...category,
 
         // 商城
-        ...product,
-        
-        // 活动
-        ...activity2,
+        // ...product,
 
         // 活动
         ...activity,
         
         // 课程
-        ...lesson,
+        // ...lesson,
         
         // 等级
-        ...level,
+        // ...level,
         
         // 优惠券
         ...coupon,
@@ -89,7 +85,7 @@ export default new Router({
         ...guide,
 
         // 渠道
-        ...channel,
+        // ...channel,
       ]
     },
     // {

@@ -3,7 +3,7 @@
      <div class="data-setting" :style="{'height': `${mainHeight}px`}">
       <el-form class="form" :model="form" ref="model" label-position="top" size="small">
         <el-form-item v-if="filterItem(key)" v-for="(item, key) in form" :key="key" class="setting-item" label="" prop="">
-          <p class="title">{{item.name}}</p>
+          <p class="title">{{item.name || ''}}</p>
           <span class="tips">PS:{{item.description}}</span>
           <div class="setting-item-content">
             <el-input class="input" placeholder="请输入数值" v-model="item.content" clearable></el-input>
@@ -19,9 +19,9 @@
           </div>
         </el-form-item> -->
         <!-- 优惠券起始编号 -->
-        <el-form-item class="setting-item" label="" prop="" :rules="[{ required: true, message: '该字段不能为空', trigger: 'blur'}]">
-          <p class="title">{{form.couponsStart.name}}</p>
-          <span class="tips">PS:{{form.couponsStart.description}}</span>
+        <el-form-item  v-if="form.couponsStart" class="setting-item" :rules="[{ required: true, message: '该字段不能为空', trigger: 'blur'}]">
+          <p class="title">{{form.couponsStart.name || ''}}</p>
+          <span class="tips">PS:{{form.couponsStart.description || ''}}</span>
           <div style="margin:10px 0 0 10px;;">
             <el-tag
               v-for="(tag, i) in couponsStart"
@@ -49,8 +49,8 @@
           </div>
         </el-form-item>
         <!-- 预约提醒 -->
-        <el-form-item class="setting-item" label="" prop="" :rules="[{ required: true, message: '该字段不能为空', trigger: 'blur'}]">
-          <p class="title">{{form.reservationRemind.name}}</p>
+        <el-form-item v-if="form.reservationRemind" class="setting-item" :rules="[{ required: true, message: '该字段不能为空', trigger: 'blur'}]">
+          <p class="title">{{form.reservationRemind.name || ''}}</p>
           <span class="tips">PS:{{form.reservationRemind.description}}</span>
           <div style="margin-left:10px;">
             <div style="margin:15px 0px;">

@@ -35,7 +35,7 @@
     </div>
     <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" stripe url="/employee/list"></qc-table>
   
-    <el-dialog title="编辑资料" :visible.sync="dialogFormVisible" width="40%" append-to-body @close="digClose()">
+    <el-dialog title="编辑资料" :visible.sync="dialogFormVisible" width="500px" append-to-body @close="digClose()">
       <el-form :model="model" ref="model" :rules="rules" size="small" style="width:300px;margin:0 auto;">
         <el-form-item label="导购姓名" prop="name">
           <el-input v-model="model.name"></el-input>

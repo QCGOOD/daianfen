@@ -9,7 +9,7 @@
     </div>
     <qc-table ref="table" :height="domHeight" :table-list="showData" :search="searchData" stripe url="/makeCoupons/page"></qc-table>
   
-    <el-dialog :title="updateId?'修改':'新建'" :visible.sync="dialogFormVisible" append-to-body @close="digClose()">
+    <el-dialog :title="updateId?'修改':'新建'" :visible.sync="dialogFormVisible" width="600px" append-to-body @close="digClose()">
       <el-form :model="model" ref="model" :rules="rules" label-width="120px" style="width:500px;margin:0 auto;">
         <el-form-item label="标题" prop="title">
           <el-input v-model.trim="model.title"></el-input>

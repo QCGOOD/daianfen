@@ -18,7 +18,7 @@
           <span class="tips">建议尺寸大小： 375*330</span>
         </div>
         <div class="img" style="width:375px;height:330px;">
-          <img :src="imgHost+configList[2].content" alt="">
+          <img v-if="configList[2].content" :src="imgHost+configList[2].content" alt="">
         </div>
         <el-button @click.native="openImgBox('radio', 2)">更换图片</el-button>
       </div>
@@ -29,7 +29,7 @@
           <span class="tips">建议尺寸大小： 375*200</span>
         </div>
         <div class="img" style="width:375px;height:200px;">
-          <img :src="imgHost+configList[0].content" alt="">
+          <img v-if="configList[0].content" :src="imgHost+configList[0].content" alt="">
         </div>
         <el-button @click.native="openImgBox('radio', 0)">更换图片</el-button>
       </div>
@@ -40,7 +40,7 @@
           <span class="tips">建议尺寸大小： 375*155</span>
         </div>
         <div class="img" style="width:375px;height:155px;">
-          <img :src="imgHost+configList[1].content" alt="">
+          <img v-if="configList[1].content" :src="imgHost+configList[1].content" alt="">
         </div>
         <el-button @click.native="openImgBox('radio', 1)">更换图片</el-button>
       </div>

@@ -9,14 +9,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 axios.defaults.baseURL =  base.projectName();
 
-//添加请求拦截器)
-// axios.interceptors.request.use((config) => {
-//     //在发送请求之前做某件事
-//     
-//     return config;
-// }, (error) => {
-//     return Promise.reject(error);
-// });
 //返回状态判断(添加响应拦截器)
 axios.interceptors.response.use((success) => {
   if (success.data.errCode == 0) {
