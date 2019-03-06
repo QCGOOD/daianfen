@@ -3,11 +3,14 @@
     <div ref="search">
       <search-wrap>
         <el-form :inline="true" class="demo-form-inline">
-          <el-form-item label="">
-            <el-input size="small" placeholder="城市" v-model="searchData.city"></el-input>
+          <el-form-item>
+            <el-input size="small" placeholder="编号" v-model="searchData.shopNo"></el-input>
           </el-form-item>
-          <el-form-item label="">
+          <el-form-item>
             <el-input size="small" placeholder="专柜" v-model="searchData.shopName"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input size="small" placeholder="城市" v-model="searchData.city"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="small" @click="search()">查询</el-button>
@@ -86,7 +89,8 @@ export default {
       model: {},
       searchData: {
         shopName: "",
-        city: ""
+        city: "",
+        shopNo: ""
       },
       showData: [
         { prop: "shopNo", label: "编号", width: 150, align: "center" },

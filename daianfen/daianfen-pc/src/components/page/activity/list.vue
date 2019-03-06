@@ -35,7 +35,7 @@
         <el-form-item label="起始编号" v-if="model.couponsBreed == 1" prop="startNo" :rules="[{ required: true, message: '该字段不能为空'}]">
           <el-input v-model="model.startNo" size="small" style="width:210px;"></el-input>
         </el-form-item>
-        <el-form-item label="发放范围" prop="sendScope">
+        <el-form-item label="投放范围" prop="sendScope">
           <el-select v-model="model.sendScope" size="small" placeholder="请选择">
             <el-option v-for="item in optionScope" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled">
             </el-option>
@@ -47,10 +47,10 @@
               {{tag.shopName}}
             </el-tag>
           </div>
-          <el-button class="button-new-tag" size="small" @click="onshowShop">添加专柜</el-button>
+          <el-button class="button-new-tag" size="mini" @click="onshowShop">添加专柜</el-button>
         </el-form-item>
         <el-form-item v-if="model.sendScope == 'by_city'" label="投放城市" prop="city" :rules="[{ required: true, message: '该字段不能为空'}]">
-          <el-select v-model="cityTags" multiple filterable closable collapse-tags placeholder="请选择">
+          <el-select v-model="cityTags" multiple filterable closable placeholder="请选择，可搜索">
             <el-option v-for="item in cityList" :key="item" :label="item" :value="item">
             </el-option>
           </el-select>
@@ -159,8 +159,14 @@ export default {
       if (val != 2) this.model.makeCouponsId = "";
     },
     "model.sendScope"(val) {
-      if (val != "by_shop") this.model.shopId = "";
-      if (val != "by_city") this.model.city = "";
+      if (val != "by_shop") {
+        this.model.shopId = "";
+        this.shopTags = [];
+      }
+      if (val != "by_city") {
+        this.model.city = "";
+        this.model.cityTags = "";
+      }
     },
     dialogFormVisible(val) {
       if (!val) {
@@ -358,7 +364,7 @@ export default {
             this.apiAddData(this.model);
           }
         } else {
-          this.$message.warning("输入信息有误");
+          this.$message.warning("请完善数据");
           this.loading = false;
         }
       });

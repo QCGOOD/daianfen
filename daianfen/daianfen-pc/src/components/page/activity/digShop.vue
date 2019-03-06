@@ -1,7 +1,10 @@
 <template>
-  <el-dialog class="store-dialog" title="选择专柜" v-loading="loading" :visible.sync="visible" width="600px" :append-to-body="true" :before-close="close" :close-on-click-modal="false" :close-on-press-escape="false">
+  <el-dialog class="store-dialog" title="选择专柜" v-loading="loading" :visible.sync="visible" width="700px" :append-to-body="true" :before-close="close" :close-on-click-modal="false" :close-on-press-escape="false">
     <search-wrap>
       <el-form :inline="true">
+        <el-form-item label="编号">
+          <el-input size="small" v-model="search.shopNo" clearable></el-input>
+        </el-form-item>
         <el-form-item label="专柜">
           <el-input size="small" v-model="search.shopName" clearable></el-input>
         </el-form-item>
@@ -17,7 +20,7 @@
     <div class="table" style="height: 400px;margin: 0;">
       <el-table :data="tableData" height="100%" style="width: 100%;overflow-y: auto;" highlight-current-row @selection-change="selection" element-loading-text="数据加载中">
         <el-table-column type="selection" width="50"></el-table-column>
-        <el-table-column type="index" width="50"></el-table-column>
+        <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column v-for="(item, index) in showData" :key="index" :prop="item.prop" :label="item.label" align="left"></el-table-column>
       </el-table>
     </div>
@@ -51,8 +54,9 @@ export default {
       tableApi: "/shop/list",
       tableId: [],
       search: {
-        name: "",
-        city: ""
+        shopName: "",
+        city: "",
+        shopNo: ""
       },
       showData: [
         { prop: "shopNo", label: "编号" },
