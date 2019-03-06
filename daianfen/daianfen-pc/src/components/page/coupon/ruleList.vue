@@ -84,7 +84,7 @@ export default {
         { prop: "startNo", label: "起始编号"},
         { prop: "couponsType", label: "类型"},
         { prop: "validDate", label: "过期时间"},
-        { prop: "content", label: "内容", align: 'left'},
+        { prop: "content", label: "说明", align: 'left'},
       ],
       rules: {
         title: [

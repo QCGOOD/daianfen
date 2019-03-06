@@ -172,7 +172,7 @@ export default {
       if (val) {
         let arr = "";
         this.shopTags.forEach(item => {
-          arr += "|" + item.id || item.shopId;
+          arr += "|" + (item.id || item.shopId);
         });
         this.model.shopId = arr.substr(1);
       }
@@ -185,6 +185,7 @@ export default {
         });
         this.model.city = arr.substr(1);
       }
+
     }
   },
   created() {
