@@ -66,24 +66,23 @@ Page({
         
         let resData = res.data.content0.rows;
         let total  = res.data.content0.total;
-        let regTitle = /.*\s/; // 匹配标题
-        let regDetail = /\s[0-9].*/g; // 匹配详情
         this.setData({
           notuseCount: res.data.content0.notuseCount,
           usedCount: res.data.content0.usedCount,
           validCount: res.data.content0.validCount
         })
         resData.map((item) => {
-         //  item.title = item.content.match(regTitle);
-          item.title = item.content.substr(0, item.content.indexOf(" "));
-          item.content = item.content = item.content.replace(/；/g,'；\n');
           try {
+            let regTitle = /.*\s/; // 匹配标题
+            let regDetail = /\s[0-9].*/g; // 匹配详情
+          //  item.title = item.content.match(regTitle);
+            item.title = item.content.substr(0, item.content.indexOf(" "));
+            item.content = item.content = item.content.replace(/；/g,'；\n');
             item.detail = item.content.match(regDetail).join('');
           }catch(err) {
             console.log(err)
-            item.detail = item.content
+            item.detail = item.content;
           }
-          
         })
 
         // 分页
