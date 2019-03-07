@@ -1,8 +1,9 @@
 import http from '/utils/http.js'
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    this.globalData.layoutHeight = wx.getSystemInfoSync().windowHeight - 30;
+    // 获取新版本
+    this.getUpdate()
+    // 登录
     this.userLoing();
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
     wx.getSetting({
@@ -22,6 +23,8 @@ App({
         }
       }
     })
+    // 展示本地存储能力
+    this.globalData.layoutHeight = wx.getSystemInfoSync().windowHeight - 30;
   },
   userLoing() {
     wx.login({
@@ -58,6 +61,24 @@ App({
       title: text,
       icon: icon || 'none'
     })
+  },
+  // 获取新版本
+  getUpdate() {
+    try {
+      const updateManager = wx.getUpdateManager();
+      updateManager.onUpdateReady(function() {
+        wx.showModal({
+          title: "更新提示",
+          content: "新版本已经准备好，是否重启应用？",
+          success(res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate();
+            }
+          }
+        });
+      });
+    } catch (err) {}
   },
   globalData: {
     userInfo: null,
