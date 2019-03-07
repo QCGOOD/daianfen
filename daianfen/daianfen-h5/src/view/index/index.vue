@@ -50,6 +50,7 @@
 <script>
 import { Search, Tab, TabItem, Scroller, Badge } from 'vux'
 import ReserveItem from "@/components/Common/reserveItem";
+import { setTimeout } from 'timers';
 export default {
   components: {
     Search, Tab, TabItem, Scroller, ReserveItem, Badge
@@ -59,6 +60,7 @@ export default {
       scrollerTop: 0,
       onFetching: false,
       hasMoreData: false,
+      canIScan: true,
       searchData: {
         curPage: 1,
         size: 20,
@@ -207,7 +209,16 @@ export default {
     },
     // 扫码
     qrCode() {
-      this.$wxSdk.scanQRCode();
+      if (this.canIScan) {
+        this.$wxSdk.scanQRCode();
+         this.canIScan = false;
+        setTimeout(_ => {
+          this.canIScan = true;
+        }, 2000)
+      } else {
+        return false;
+      }
+     
     },
     resultScanQRCode(id) {
       this.$router.push(`/index/examine?id=${id}`)
