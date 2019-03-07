@@ -17,5 +17,10 @@
     "navigationBarBackgroundColor": "#b80223",
     "navigationBarTitleText": "黛安芬乐享试",
     "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于搜索附近的专柜"
+    }
   }
 }

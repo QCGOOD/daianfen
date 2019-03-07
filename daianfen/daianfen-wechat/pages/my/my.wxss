@@ -23,6 +23,12 @@ page {
   background: #b80223;
 }
 
+.my-wrap button{
+  font-size:28rpx;
+  margin-top: 60rpx;
+  color: #b80223 !important;
+}
+
 .my-wrap .userinfo-avatar {
   display: block;
   margin: 0rpx auto 30rpx;

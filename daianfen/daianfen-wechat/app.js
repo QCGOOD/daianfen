@@ -4,6 +4,24 @@ App({
     // 展示本地存储能力
     this.globalData.layoutHeight = wx.getSystemInfoSync().windowHeight - 30;
     this.userLoing();
+    // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo','scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success() {
+              // 用户已经同意小程序使用此功能，后续调用 接口不会弹窗询问
+            }
+          })
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+            }
+          })
+        }
+      }
+    })
   },
   userLoing() {
     wx.login({

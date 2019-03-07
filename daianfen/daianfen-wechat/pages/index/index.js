@@ -19,20 +19,6 @@ Page({
   },
   onLoad: function () {
     this.apiGetPoster();
-    // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo','scope.userLocation']) {
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success() {
-              // 用户已经同意小程序使用此功能，后续调用 接口不会弹窗询问
-              // wx.startRecord()
-            }
-          })
-        }
-      }
-    })
   },
 
   // 获取图片
