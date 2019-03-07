@@ -75,8 +75,13 @@ export default {
         // 日期
         this.detail.validDate = `${date.substr(0,4)}年${date.substr(4,2)}月${date.substr(6,2)}日`
         // 内容
-        let info = res.data.content0.content.replace(/；/g,'；<br>');
-        this.detail.info = info.match(regDetail).join('');
+        try {
+          let info = res.data.content0.content.replace(/；/g,'；<br>');
+          this.detail.info = info.match(regDetail).join('');
+        } catch (error) {
+          this.detail.info = res.data.content0.content;
+        }
+        
       })
     },
     submit() {

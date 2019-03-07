@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <div v-if="!isFollow" class="follow" @click="showDialogStyle = true">您还没有关注哦，点击关注~</div>
-    <div v-transfer-dom>
-      <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'overflow-y': 'auto'}" >
-        <div class="img-box">
-          <img :src="imgHost+qrUrl" style="max-width:100%">
-          <i class="iconfont icon-guanbi1 close" @click="showDialogStyle = false"></i>
-        </div>
-      </x-dialog>
-    </div>
     <router-view v-wechat-title="$route.meta.title"/>
   </div>
 </template>
@@ -25,16 +16,11 @@ export default {
   name: "App",
   data() {
     return {
-      showDialogStyle: false,
-      isFollow: true,
-      qrUrl: ''
+
     }
   },
   created() {
-    // this.apiOpenFollow()
-    // this.$wxSdk.onMenuShare('加速商学院','助力优秀企业加速发展！',`${this.$ROOTURL}/mobile/POUND/activity?wo=1&wot=2&woacm=1&mpl=1`,'http://athena-1255600302.cosgz.myqcloud.com/attachments/abs.jpg')
     if (process.env.NODE_ENV === "development") {
-      // this.apiLogin();
     } else {
       this.$wxSdk.loadJsapiTicketSign();
       this.$wxSdk.hideMenuItems();
@@ -42,16 +28,6 @@ export default {
     // this.apiGetUserInfo();
   },
   methods: {
-    apiLogin() {
-      this.$http
-        .post("/member/login/mobile", { mobile: "18570478526", code: 1024 })
-        .then(res => {
-          this.apiGetOpenId("ogkuh0rsbAzcO8cHLMPiL50rK9lE");
-        });
-    },
-    apiGetOpenId(openId) {
-      this.$http.post("/member/openId", { openId }).then(res => {});
-    },
     apiGetUserInfo() {
       this.$http.get("member/info").then(res => {
         this.$store.commit('userSave', res.data.data)

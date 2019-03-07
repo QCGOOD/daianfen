@@ -30,10 +30,7 @@ if(process.env.NODE_ENV === 'production') {
   console.log('development');
 }
 Vue.prototype.imgHost = 'http://athena-1255600302.cosgz.myqcloud.com'
-Vue.prototype.imgCut = 'http://athena-1255600302.picgz.myqcloud.com'
-Vue.prototype.cutParam1 = '?imageView2/1/w/375/h/198'
-Vue.prototype.cutParam2 = '?imageView2/1/w/375/h/180'
-Vue.prototype.cutParam3 = '?imageView2/1/w/375/h/145'
+
 Vue.prototype.toast = function (text) {
   this.$vux.toast.show({
     text: text,

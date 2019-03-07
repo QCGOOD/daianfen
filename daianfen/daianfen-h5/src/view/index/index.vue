@@ -85,11 +85,16 @@ export default {
     };
   },
   created() {
+    if(process.env.NODE_ENV === 'production') {
+      this.$wxSdk.loadJsapiTicketSign();
+      this.$wxSdk.hideMenuItems();
+    }
     this.search()
     if(localStorage.getItem('userInfo')){
       let userInfo = localStorage.getItem('userInfo')
       this.userInfo = JSON.parse(userInfo)
     }
+    
   },
   mounted() {
     this.getHeight()
