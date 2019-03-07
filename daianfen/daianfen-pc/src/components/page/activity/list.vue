@@ -165,7 +165,7 @@ export default {
       }
       if (val != "by_city") {
         this.model.city = "";
-        this.model.cityTags = "";
+        this.cityTags = [];
       }
     },
     dialogFormVisible(val) {
