@@ -39,7 +39,7 @@
           <el-input-number style="margin-left:3px;" v-model="model.totalCount"  :min="1"></el-input-number>
         </el-form-item> -->
         <el-form-item label="过期时间" prop="validDate">
-          <el-date-picker size="small" value-format="yyyy-MM-dd" format="yyyy-MM-dd" v-model="model.validDate" type="date" placeholder="开始时间"></el-date-picker>
+          <el-date-picker size="small" value-format="yyyy-MM-dd" format="yyyy-MM-dd" v-model="model.validDate" type="date" placeholder="过期时间"></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
