@@ -2,8 +2,8 @@
   <view class="my-wrap">
     <button size="mini" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo"> 获取头像昵称 </button>
     <block wx:else>
-      <image class="userinfo-avatar" src="{{apiUserInfo.imgUrl?apiUserInfo.imgUrl:userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-name">{{apiUserInfo.name?apiUserInfo.name:userInfo.nickName}}</text>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl || apiUserInfo.imgUrl}}" background-size="cover"></image>
+      <text class="userinfo-name">{{apiUserInfo.name || userInfo.nickName}}</text>
       <text class="userinfo-phone">{{apiUserInfo.phoneNo}}</text>
     </block>
   </view>

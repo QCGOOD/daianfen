@@ -3,7 +3,7 @@
       <block wx:for="{{reverseData}}" wx:key="{{index}}">
          <navigator class="reserve-item" url="../reserveDetail/reserveDetail?id={{item.id}}">
             <view class="reserve-top">
-               <image class="head-img" src="{{item.imagUrl?item.imagUrl:userInfo.avatarUrl}}"></image>
+               <image class="head-img" src="{{userInfo.avatarUrl || item.imagUrl}}"></image>
                <text class="name">{{item.memberName}}</text>
                <view class="cancel" wx:if="{{item.state == 1}}" >已预约</view>
                <view class="cancel" wx:if="{{item.state == 2}}" style="color:#808080;" >已到店</view>
