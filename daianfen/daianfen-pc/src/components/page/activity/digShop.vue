@@ -21,7 +21,7 @@
       <el-table :data="tableData" height="100%" style="width: 100%;overflow-y: auto;" highlight-current-row @selection-change="selection" element-loading-text="数据加载中">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column v-for="(item, index) in showData" :key="index" :prop="item.prop" :label="item.label" align="left"></el-table-column>
+        <el-table-column v-for="(item, index) in showData" :key="index" :prop="item.prop" :label="item.label" :width="item.width || ''" align="left"></el-table-column>
       </el-table>
     </div>
     <div style="text-align:center;padding:10px 0;border-bottom: 1px solid #ebeef5;">
@@ -60,7 +60,7 @@ export default {
       },
       showData: [
         { prop: "shopNo", label: "编号" },
-        { prop: "shopName", label: "专柜" },
+        { prop: "shopName", label: "专柜",  width: '250' },
         { prop: "shopType", label: "渠道" },
         { prop: "city", label: "城市" },
         // { prop: "createTime", label: "创建时间" }
