@@ -50,7 +50,6 @@
 <script>
 import { Search, Tab, TabItem, Scroller, Badge } from 'vux'
 import ReserveItem from "@/components/Common/reserveItem";
-import { setTimeout } from 'timers';
 export default {
   components: {
     Search, Tab, TabItem, Scroller, ReserveItem, Badge
@@ -87,7 +86,6 @@ export default {
   created() {
     if(process.env.NODE_ENV === 'production') {
       this.$wxSdk.loadJsapiTicketSign();
-      this.$wxSdk.hideMenuItems();
     }
     this.search()
     if(localStorage.getItem('userInfo')){

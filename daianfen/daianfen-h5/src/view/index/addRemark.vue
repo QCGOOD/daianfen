@@ -39,7 +39,6 @@
 <script>
 import { Divider, XTextarea, Group, XButton  } from 'vux'
 import ReserveItem from "@/components/Common/reserveItem";
-import { setTimeout } from 'timers';
 export default {
   components: {
     Divider, XTextarea, Group, XButton

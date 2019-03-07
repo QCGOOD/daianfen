@@ -23,7 +23,6 @@ export default {
     if (process.env.NODE_ENV === "development") {
     } else {
       this.$wxSdk.loadJsapiTicketSign();
-      this.$wxSdk.hideMenuItems();
     }
     // this.apiGetUserInfo();
   },
