@@ -23,10 +23,10 @@ Page({
   
   onLoad: function (options) {
     this.setData({
-      reserveId: options.reserveId
+      reserveId: options.reserveId || ''
     })
     this.apiGetPoster();
-    this.apiGetReserve(options.reserveId)
+    this.apiGetReserve(options.reserveId || '')
     this.apiGetUserInfo()
   },
   closeDialog() {
@@ -88,13 +88,18 @@ Page({
         });
       } else if (res.data.errCode == 0) {
         this.setData({
-          reserveData: res.data.content0.reservation,
-          couponNum: res.data.content0.couponsCount,
-          latitude: res.data.content0.reservation.latitude,
-          longitude: res.data.content0.reservation.longitude,
-          address: res.data.content0.reservation.address,
-          shopName: res.data.content0.reservation.shopName
+          couponNum: res.data.content0.couponsCount || 0,
         })
+        if (res.data.content0.reservation) {
+          this.setData({
+            reserveData: res.data.content0.reservation,
+            latitude: res.data.content0.reservation.latitude,
+            longitude: res.data.content0.reservation.longitude,
+            address: res.data.content0.reservation.address,
+            shopName: res.data.content0.reservation.shopName
+          })
+        }
+        
       }else{
         app.toast(res.data.errMsg)
       }

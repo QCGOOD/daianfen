@@ -2,7 +2,7 @@
    <view class="header">
       <i class="icon icon-yuyuechenggong"></i>
       <view class="success">预约成功</view>
-      <view style="color:#808080;">关注"黛安芬官方服务号"获得更多精彩信息</view>
+      <view style="color:#808080;">关注"<text style="color:#b80223;">黛安芬官方服务号</text>"获得更多精彩信息</view>
    </view>
    <!-- 二维码 -->
    <!-- <view class="qr-wrap" bindtap="closeQR" wx:if="{{openQR}}">
