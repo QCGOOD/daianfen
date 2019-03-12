@@ -5,8 +5,8 @@ export const TABLE = {
     return {
       tableData: [],
       search: {
-        pageNum: 1,
-        pageSize: 20,
+        curPage: 1,
+        size: 20,
       },
     }
   },
@@ -24,22 +24,22 @@ export const TABLE = {
      * 刷新搜索
      */
     onSearchRefresh() {
-      this.search.pageNum = 1
+      this.search.curPage = 1
       this.onSearch()
     },
     /**
      * 修改每页条数
      */
     onChangeSize(size) {
-      this.search.pageSize = size
-      this.search.pageNum = 1
+      this.search.size = size
+      this.search.curPage = 1
       this.onSearch()
     },
     /**
      * 修改页码
      */
     onChangePage(num) {
-      this.search.pageNum = num
+      this.search.curPage = num
       this.onSearch()
     },
   },

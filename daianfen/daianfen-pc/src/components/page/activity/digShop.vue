@@ -25,7 +25,7 @@
       </el-table>
     </div>
     <div style="text-align:center;padding:10px 0;border-bottom: 1px solid #ebeef5;">
-      <el-pagination layout="prev, pager, next, sizes" :page-sizes="[10, 20, 30]" :page-size="search.pageSize" :current-page="search.pageNum" :total="search.total" @size-change="onChangeSize" @current-change="onChangePage"></el-pagination>
+      <el-pagination layout="prev, pager, next, sizes" :page-sizes="[10, 20, 30]" :page-size="search.size" :current-page="search.curPage" :total="search.total" @size-change="onChangeSize" @current-change="onChangePage"></el-pagination>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button size="small" @click="close(false)">取 消</el-button>
