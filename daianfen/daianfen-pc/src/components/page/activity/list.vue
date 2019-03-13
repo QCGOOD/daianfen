@@ -73,7 +73,7 @@
         <el-button size="small" type="primary" @click="submit()">确 定</el-button>
       </div>
     </el-dialog>
-    <dig-shop :visible="digShop" @submit="shopSubmit" @close="onHideShop"></dig-shop>
+    <dig-shop :visible="digShop" a="1" :shop-tags="shopTags" @submit="shopSubmit" @close="onHideShop"></dig-shop>
   </div>
 </template>
 
@@ -251,11 +251,15 @@ export default {
           this.detailLoading = false;
           this.model = res.data.content0;
           if (this.model.cityScopeList) {
+            this.cityTags = this.model.cityScopeList;
+            return false;
             for (let i = 0; i < this.model.cityScopeList.length; i++) {
               this.cityTags.push(this.model.cityScopeList[i].city);
             }
           }
           if (this.model.shopScopeList) {
+            this.shopTags = this.model.shopScopeList;
+            return false;
             for (let i = 0; i < this.model.shopScopeList.length; i++) {
               this.shopTags.push(this.model.shopScopeList[i]);
             }

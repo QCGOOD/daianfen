@@ -16,6 +16,9 @@
             <el-input size="small" placeholder="导购姓名" v-model="searchData.employeeName"></el-input>
           </el-form-item>
           <el-form-item label="">
+            <el-input size="small" placeholder="导购编号" v-model="searchData.jobNumber"></el-input>
+          </el-form-item>
+          <el-form-item label="">
             <el-input size="small" type="number" placeholder="导购手机" v-model.number="searchData.phoneNo"></el-input>
           </el-form-item>
           <el-form-item>
@@ -84,6 +87,7 @@ export default {
       model: {},
       searchData: {
         employeeName: '',
+        jobNumber: '',
         phoneNo: '',
         shopNo: '',
         shopName: '',

@@ -18,7 +18,7 @@
     </search-wrap>
     <!-- <qc-table ref="table" :table-list="model.show" :search="model.search" :autoHeight="500" url="api/admin/v1/print_store/page"></qc-table> -->
     <div class="table" style="height: 400px;margin: 0;">
-      <el-table :data="tableData" height="100%" style="width: 100%;overflow-y: auto;" highlight-current-row @selection-change="selection" element-loading-text="数据加载中">
+      <el-table :data="tableData" height="100%" ref="tabel" style="width: 100%;overflow-y: auto;" highlight-current-row @selection-change="selection" element-loading-text="数据加载中">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column v-for="(item, index) in showData" :key="index" :prop="item.prop" :label="item.label" :width="item.width || ''" align="left"></el-table-column>
@@ -47,7 +47,15 @@ export default {
     id: {
       type: String,
       default: ""
-    }
+    },
+    shopTags: {
+      type: Array,
+      default: []
+    },
+    a:{
+      type: String,
+      default: ''
+    },
   },
   data() {
     return {
@@ -65,7 +73,6 @@ export default {
         { prop: "city", label: "城市" },
         // { prop: "createTime", label: "创建时间" }
       ],
-      tableData: [],
       loading: false
     };
   },
@@ -74,11 +81,26 @@ export default {
       if (val) {
         this.onSearch();
       }
+    },
+    tableData() {
+      // this.$nextTick(_ => {
+      //   console.log(this.shopTags)
+      //   for (var i = 0;i<this.shopTags.length;i++) {
+      //     for (var j = 0;j<this.tableData.length;j++) {
+      //       if ((this.shopTags[i].id || this.shopTags[i].shopId) == this.tableData[j].id) {
+      //         this.$ref.table.toggleRowSelection(this.tableData[j], true)
+      //         console.log(this.tableId[i].shopName)
+      //       }
+      //     }
+      //   }
+        
+      // })
     }
   },
   methods: {
     selection(row) {
       this.tableId = row;
+      console.log(this.tableId)
     },
     submit() {
       this.$emit("submit", this.tableId);
