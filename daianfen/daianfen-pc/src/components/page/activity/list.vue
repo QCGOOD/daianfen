@@ -73,7 +73,7 @@
         <el-button size="small" type="primary" @click="submit()">确 定</el-button>
       </div>
     </el-dialog>
-    <dig-shop :visible="digShop" a="1" :shop-tags="shopTags" @submit="shopSubmit" @close="onHideShop"></dig-shop>
+    <dig-shop :visible="digShop" @submit="shopSubmit" @close="onHideShop"></dig-shop>
   </div>
 </template>
 

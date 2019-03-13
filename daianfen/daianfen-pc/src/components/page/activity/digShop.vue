@@ -52,10 +52,6 @@ export default {
       type: Array,
       default: []
     },
-    a:{
-      type: String,
-      default: ''
-    },
   },
   data() {
     return {
