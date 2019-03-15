@@ -80,7 +80,7 @@ Page({
             item.content = item.content = item.content.replace(/；/g,'；\n');
             item.detail = item.content.match(regDetail).join('');
           }catch(err) {
-            console.log(err)
+            // console.log(err)
             item.detail = item.content;
           }
         })

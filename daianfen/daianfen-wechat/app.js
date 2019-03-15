@@ -35,14 +35,11 @@ App({
     })
   },
   apiLogin(code) {
-    // var params;
-    // if (nickName && imgUrl) params = { code, nickName, imgUrl };
-    // else params = { code };
-    // let params = { code, nickName, imgUrl }
     http.post('/login', { code }).then(res => {
-      // console.log(res)
       wx.setStorageSync('sessionKeyId', res.data.sessionKeyId);
-      // console.log('sessionKeyId=========>',res.data.sessionKeyId);
+      if (this.userLoginReadyCallback) {
+        this.userLoginReadyCallback({sessionKeyId: res.data.sessionKeyId })
+      }
     })
   },
   login(callback) {
@@ -50,7 +47,7 @@ App({
       success: rej => {
         http.post('/login',{code: rej.code}).then(res => {
           wx.setStorageSync('sessionKeyId', res.data.sessionKeyId);
-          callback(res)
+          callback(res);
         })
       }
     })

@@ -18,7 +18,16 @@ Page({
     })
   },
   onLoad: function () {
-    this.apiGetPoster();
+    let sessionKeyId = wx.getStorageSync('sessionKeyId')
+    if(!sessionKeyId) {
+      app.userLoginReadyCallback = res => {
+        wx.setStorageSync('sessionKeyId', res.sessionKeyId)
+        this.apiGetPoster();
+      }
+      console.log('触发了回调')
+    }else{
+      this.apiGetPoster();
+    }
   },
 
   // 获取图片
