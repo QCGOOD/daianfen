@@ -79,20 +79,19 @@ Page({
         app.login(() => {
           this.apiGetReserveList()
         });
-      } else if(res.data.errCode == 0){
-        wx.hideNavigationBarLoading();
-        wx.stopPullDownRefresh();
-        
-        let resData = res.data.content0.rows;
-        let total  = res.data.content0.total;
-
-        // 分页
-        pageView(this, page, size, 'reverseData', reverseData, resData, total);
-
+      } else if(res.data.errCode == 0){   
+        if (res.data.content0 && res.data.content0.rows) {
+          let resData = res.data.content0.rows;
+          let total  = res.data.content0.total || 0;
+          // 分页
+          pageView(this, page, size, 'reverseData', reverseData, resData, total);
+        }     
       }else{
         app.toast(res.data.errMsg)
       }
     }).finally(() => {
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
       setTimeout(() => {
         wx.hideLoading()
       }, 500);

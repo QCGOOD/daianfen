@@ -23,8 +23,8 @@ Page({
       app.userLoginReadyCallback = res => {
         wx.setStorageSync('sessionKeyId', res.sessionKeyId)
         this.apiGetPoster();
+        console.log('触发了回调')
       }
-      console.log('触发了回调')
     }else{
       this.apiGetPoster();
     }
